@@ -1,12 +1,17 @@
+:root {
+  --primary-color: #000000;
+  --secondary-color: #4606dc;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    color: #333;
+    color: var(--primary-color);
 }
 header {
-    background: #333;
+    background: var(--secondary-color);
     color: white;
     padding: 1rem 0;
     text-align: center;
@@ -41,12 +46,12 @@ section {
 footer {
     text-align: center;
     padding: 1rem;
-    background: #333;
+    background: var(--secondary-color);
     color: white;
     margin-top: 20px;
 }
 a {
-    color: #0066cc;
+    color: var(--primary-color);
 }form {
   max-width: 500px;
   margin: 40px auto;
@@ -84,7 +89,7 @@ form h2 {
 }
 
 button[type="submit"] {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -92,5 +97,6 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
-  background-color: #3e8e41;
+button:hover {
+  background-color: var(--secondary-color);
+
