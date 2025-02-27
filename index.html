@@ -1,32 +1,112 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Alex McVay</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex McVay's Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        section {
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .project {
+            background: #e3e3e3;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+        }
+        a {
+            color: #0066cc;
+        }
+    </style>
 </head>
 <body>
-    <main>
-        <header>
-            <h1>Hello World</h1>
-        </header>
-        <section>
-            <h2>About Me</h2>
-            <p>I'm a student at Villanova University majoring in Information Technology and minoring in Computer Science.</p>
-        </section>
-        <section>
-            <h2>My Skills</h2>
+    <header>
+        <h1>Alex McVay's Portfolio</h1>
+        <nav>
             <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <!-- TODO: Add other skills here -->
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </section>
-        <section>
-            <h2>My Projects</h2>
-            <!-- TODO: Add project links or descriptions here -->
-        </section>
-    </main>
+        </nav>
+    </header>
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi, I'm Alex McVay! A passionate programmer specializing in cybersecurity, AI, and cloud computing. I love building efficient and secure applications.</p>
+    </section>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Project Name</h3>
+            <p>Description of the project and technologies used.</p>
+            <a href="#">View Project</a>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Cybersecurity</li>
+            <li>AI & Machine Learning</li>
+            <li>Cloud Computing (AWS, GCP)</li>
+            <li>Python, JavaScript, Java</li>
+            <li>Web Development</li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:alex@example.com">alya@example.com</a></p>
+        <p>LinkedIn: <a href="#">linkedin.com/in/alexmcvay</a></p>
+        <p>GitHub: <a href="#">github.com/alexmcvay</a></p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Alex McVay. All rights reserved.</p>
+    </footer>
 </body>
+</html>
+
 </html>
