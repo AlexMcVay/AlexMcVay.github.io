@@ -98,5 +98,84 @@ button[type="submit"] {
 }
 
 button:hover {
+  background-color: var(--secondary-color);}
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.magic-8-ball {
+  width: 300px;
+  height: 300px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ball {
+  width: 200px;
+  height: 200px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.answer {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.question {
+  font-size: 18px;
+  color: var(--secondary-color);
+  margin-bottom: 20px;
+}
+
+#question-input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#ask-button {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
   background-color: var(--secondary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+#ask-button:hover {
+  background-color: var(--primary-color);
+}
+
+.loading-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
 
