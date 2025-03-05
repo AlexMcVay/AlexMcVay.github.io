@@ -27,10 +27,19 @@
     
     <section id="projects">
         <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Name</h3>
-            <p>Description of the project and technologies used.</p>
-            <a href="#">View Project</a>
+        <Project
+            title="Title"
+            img={}<!-- TODO: #13 add image -->
+            tech="js node css"
+            link=""
+            repo="https://github.com/yagoestevez/cortala"
+          >
+            <small>Built using Node, Express, CSS + Bootstrap and Pug.</small>
+            <p>
+              A microservice which takes a raw URL and makes it a short link to make it easy to sent
+              it through the Internet.
+            </p>
+          </Project>
             <!-- TODO Find sandbox--->
         </div>
     </section>
@@ -56,7 +65,52 @@
             </div>
         </div>
     </section>
-    
+
+    <section id="certifications-and-experience">
+        <h2>Certifications and Experience</h2>
+        <!-- TODO: #14 add experiance and certifications-->
+        <div class="timeline">
+            <div class="timeline-item certification" data-date="2020-01-01">
+                <div class="icons">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/simple-icons.css/simple-icons/simple-icons.css" alt="CompTIA Cybersecurity Analyst" />
+                </div>
+                Certification Title
+                <div class="description">
+                    <h3>Certification Title</h3>
+                    <p>This certification description.</p>
+                </div>
+            </div>
+            <div class="timeline-item experience" data-date="2020-01-01 - 2020-06-30">
+                <div class="icons">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/simple-icons.css/simple-icons/simple-icons.css" alt="Python" />
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v3/simple-icons.css/simple-icons/simple-icons.css" alt="Linux" />
+                </div>
+                Experience Title
+                <div class="description">
+                    <h3>Experience Title</h3>
+                    <p>short description</p>
+                </div>
+            </div>
+       
+    </section>
+    <script>
+        const filter = document.getElementById('filter');
+        const items = document.querySelectorAll('.items .item');
+        filter.addEventListener('input', () => {
+            const value = filter.value.toLowerCase();
+            items.forEach(item => {
+                const tags = item.getAttribute('data-tags').split(',');
+                if (tags.some(tag => tag.includes(value))) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+    </section>
+
+
     <section id="contact">
         <h2 align="center"> Get in Touch</h2>
         
@@ -74,6 +128,7 @@
               <textarea id="message" name="message" required></textarea>
             </div>
             <button type="submit">Send Message</button>
+            <!-- TODO: #9 make this button send somewhere -->
           </form>
           
     </section>
@@ -81,8 +136,8 @@
     <footer>
         <p><a  href="mailto:alya.mcvay@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/alexandra-mcvay/">LinkedIn</a> |  <a href:="https://github.com/AlexMcVay">GitHub</a></p>
         <p>&copy; 2025 Alex McVay. All rights reserved.Hosted by GitHub</p>
-        <!-- TODO addd privacy policy -->
-         <!-- TODO addd terms of service -->
+        <!-- TODO #10 addd privacy policy -->
+        <!-- TODO #11 addd terms of service -->
         <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
     </footer>
 </body>
