@@ -23,16 +23,21 @@
         <h2>About Me</h2>
         <p>Hi, I'm Alex McVay! A passionate programmer specializing in cybersecurity, AI, and cloud computing. I love building efficient and secure applications.</p>
         <button class="resume-button" href="resume.pdf">Download Resume</button>
+        <!-- TODO: #16 Add Resume -->
     </section>
     
-    <section id="projects">
+    <section id="projects" script="projects-script.js">
         <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Name</h3>
-            <p>Description of the project and technologies used.</p>
+        <div class="project" data-tech="JavaScript, React">
+            <img src="project-logo.png" alt="Project Logo" class="project-logo">
+            <h3>Cool Project Name</h3>
+            <p>Description of the project and technologies used: JavaScript, React.</p>
+            <img src="project-screenshot.png" alt="Project Screenshot" class="project-screenshot">
             <a href="#">View Project</a>
-            <--- TODO Find sandbox--->
+            <!--- TODO Find sandbox--->
         </div>
+        
+        <!-- Add JavaScript functionality to sort projects by technology -->
     </section>
     
     <section id="skills">
@@ -47,9 +52,11 @@
             <li>Networking</li>
         </ul>
     </section>
-    
+    <section id="timeline">
+
+    </section>
     <section id="contact">
-        <h2 align="center"> Get in Touch</h2>
+        <h2> Get in Touch</h2>
         
         <form>
             <div class="form-group">
@@ -70,7 +77,7 @@
     </section>
     
     <footer>
-        <p><a href="mailto:alya.mcvay@gmail.com">Email</a> | <a href="#">LinkedIn</a> |  <a href:="#">GitHub</a></p>
+        <p><a href="mailto:alya.mcvay@gmail.com" target="blank">Email</a> | <a href="https://www.linkedin.com/in/alexandra-mcvay/" target="blank">LinkedIn</a> |  <a href:="https://github.com/AlexMcVay" target="blank">GitHub</a></p>
         <p>&copy; 2025 Alex McVay. All rights reserved.Hosted by GitHub</p>
         <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
     </footer>
