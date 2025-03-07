@@ -1,4 +1,5 @@
-```markdown
+[![wakatime](https://wakatime.com/badge/user/b0da6dba-e0b5-4ab0-814a-b13bb1500da8/project/0372da48-9da3-4c07-a346-d796e4fabb3c.svg)](https://wakatime.com/badge/user/b0da6dba-e0b5-4ab0-814a-b13bb1500da8/project/0372da48-9da3-4c07-a346-d796e4fabb3c)
+
 # Portfolio Website
 
 This repository contains the source code for my personal portfolio website.
@@ -11,7 +12,6 @@ This repository contains the source code for my personal portfolio website.
 -   [Installation](#installation)
 -   [Usage](#usage)
 -   [Contributing](#contributing)
--   [License](#license)
 -   [Contact](#contact)
 
 ## About
@@ -88,8 +88,3 @@ Contributions are welcome! If you find a bug or have a suggestion, please open a
 5.  Push to the branch: `git push origin feature/your-feature-name`
 6.  Submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details. 
-
-```
