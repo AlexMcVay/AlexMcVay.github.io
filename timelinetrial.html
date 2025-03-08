@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Trial</title>
+    <style>
+        /* RESET RULES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+        :root {
+            --white: #fff;
+            --divider: lightgrey;
+            --body: #f5f7f8;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            background: var(--body);
+            font-size: 16px;
+            font-family: sans-serif;
+            padding-top: 40px;
+        }
+
+        .chart-wrapper {
+            max-width: 1150px;
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+
+
+        /* CHART-VALUES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-values {
+            position: relative;
+            display: flex;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .chart-wrapper .chart-values li {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .chart-wrapper .chart-values li:not(:last-child) {
+            position: relative;
+        }
+
+        .chart-wrapper .chart-values li:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            height: 510px;
+            border-right: 1px solid var(--divider);
+        }
+
+
+        /* CHART-BARS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-bars li {
+            position: relative;
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 0;
+            opacity: 0;
+            transition: all 0.65s linear 0.2s, height 0.3s ease; /*loading transition*/
+            height: 50px;/* original height */
+            cursor: pointer;/*indicate clickable*/
+            overflow: hidden; /* hide overflow*/
+            &.description {
+                height: auto;
+                display: none;
+                /*transition: height 0.3s ease;
+                overflow: hidden;*/
+            }
+            &:hover {   
+            height: auto;
+                /*display: block;*/
+             transition: height 0.3s ease;
+             overflow: visible;
+            &.description {
+                display: block;
+                color: white;
+                }
+        }}
+
+         .description li{
+            list-style-type: disc;
+            margin-left: 40px;
+         }
+
+        @media screen and (max-width: 600px) {
+            .chart-wrapper .chart-bars li {
+                padding: 10px;
+            }
+        }
+
+    </style>
+    <script>
+        function createChart(e) {
+            const years = document.querySelectorAll(".chart-values li");
+            const tasks = document.querySelectorAll(".chart-bars li");
+            const yearsArray = [...years];
+
+            tasks.forEach(el => {
+                const duration = el.dataset.duration.split("-");
+                const startyear = duration[0];
+                const endyear = duration[1];
+                let left = 0,
+                    width = 0;
+
+                if (startyear.endsWith("½")) {
+                    const filteredArray = yearsArray.filter(year => year.textContent == startyear.slice(0, -1));
+                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                } else {
+                    const filteredArray = yearsArray.filter(year => year.textContent == startyear);
+                    left = filteredArray[0].offsetLeft;
+                }
+
+                if (endyear.endsWith("½")) {
+                    const filteredArray = yearsArray.filter(year => year.textContent == endyear.slice(0, -1));
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                } else {
+                    const filteredArray = yearsArray.filter(year => year.textContent == endyear);
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                }
+
+                // apply css
+                el.style.left = `${left}px`;
+                el.style.width = `${width}px`;
+                if (e.type == "load") {
+                    el.style.backgroundColor = el.dataset.color;
+                    el.style.opacity = 1;
+                }
+            });
+        }
+
+        window.addEventListener("load", createChart);
+        window.addEventListener("resize", createChart);
+          
+         
+    </script>
+<style>
+  ul.description li {
+    opacity: 1 !important;
+    transition: opacity 0.3s ease;
+  }
+  ul.description li:hover {
+    display: block !important;
+  }
+</style><style>
+  ul.description li {
+    opacity: 1 !important;
+    display: list-item !important;
+    transition: opacity 0.3s ease;
+  }
+  ul.description:hover li {
+    display: list-item !important;
+    opacity: 1 !important;
+  }
+</style><style>
+  ul.description li {
+    overflow: visible !important;
+  }
+  ul.description {
+    display: block !important;
+  }
+  ul.description:hover li {
+    display: list-item !important;
+    opacity: 1 !important;
+  }
+  ul.description + * {
+    display: block !important;
+    overflow: visible !important;
+  }
+</style><style>
+  ul.description li {
+    overflow: visible !important;
+    margin-bottom: 0px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease;
+  }
+  ul.description {
+    display: block !important;
+  }
+  ul.description:hover li {
+    display: list-item !important;
+    opacity: 1 !important;
+  }
+  ul.description + * {
+    display: block !important;
+    overflow: visible !important;
+    margin-bottom: 0px !important;
+  }
+</style><style>
+  ul.description li {
+    overflow: visible !important;
+    margin-bottom: 0px !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease;
+  }
+  ul.description {
+    display: block !important;
+  }
+  ul.description + * {
+    display: block !important;
+    overflow: visible !important;
+    margin-bottom: 0px !important;
+  }
+  ul.description + *:hover ul.description li {
+    display: list-item !important;
+    opacity: 1 !important;
+  }
+</style></head>
+
+<body>
+    <div class="chart-wrapper">
+        <ul class="chart-values">
+            <li>2016</li>
+            <li>2017</li>
+            <li>2018</li>
+            <li>2019</li>
+            <li>2020</li>
+            <li>2021</li>
+            <li>2022</li>
+            <li>2023</li>
+            <li>2024</li>
+            <li>2025</li>
+        </ul>
+        <ul class="chart-bars">
+            <li data-duration="2016-2020" data-color="#b03532" style="left: 0px; width: 493px; background-color: rgb(176, 53, 50); opacity: 1;">military</li>
+            <li data-duration="2021-2025" data-color="#b03532" style="left: 493px; width: 493px; background-color: rgb(176, 53, 50); opacity: 1;">aviation</li>
+            <li data-duration="2016-2025" data-color="#b03532" style="left: 0px; width: 986px; background-color: rgb(176, 53, 50); opacity: 1;">
+                <h3 class="job">trying bullets</h3>
+                <ul class="description">
+                    <li>bullet1</li>
+                    <li>bullet2</li>
+                    <li>bullet3</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+
+</body>
+</html>
