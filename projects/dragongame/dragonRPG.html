@@ -2,26 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
     <title>RPG - Dragon Repeller</title>
   </head>
   <body>
     <div id="game">
+      <!-- The game area is divided into two parts: the game text and the monster stats. -->
       <div id="stats">
+        <!-- The stats area is divided into three parts: the player's health, gold, and experience points. -->
         <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
         <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
         <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
       </div>
       <div id="controls">
+        <!-- The controls area contains three buttons: the go to store button, the go to cave button, and the fight dragon button. -->
         <button id="button1">Go to store</button>
         <button id="button2">Go to cave</button>
         <button id="button3">Fight dragon</button>
       </div>
       <div id="monsterStats">
+        <!-- The monster stats are displayed in the #monsterStats element. -->
         <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
         <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
       </div>
+      <br>
        <div id="text">
+        <!-- The game text is displayed in the #text element. -->
         Welcome to Dragon Repeller. You must defeat the dragon that is preventing people from leaving the town. You are in the town square. Where do you want to go? Use the buttons above.
       </div>
   </body>

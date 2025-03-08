@@ -1,38 +1,130 @@
-body{
-    background-color:#0a0a23;
-  }
-  #text{
-    background-color: #0a0a23;
-    color: #ffffff;
-    padding:10px;
-  }
-  #game {
+/*
+ * Style sheet for the Dragon Repeller game.
+ *
+ * This style sheet defines the layout and visual styles for the game.
+ *
+ * The game is divided into three main sections: the game area, the stats area, and the controls area.
+ * The game area contains the game text and the monster stats.
+ * The stats area contains the player's stats, including their health, gold, and experience points.
+ * The controls area contains the buttons for the player to interact with the game.
+ *
+ * The game area and stats area are defined using the #game and #stats IDs.
+ * The controls area is defined using the #controls ID.
+ *
+ * The game area is divided into two parts: the game text and the monster stats.
+ * The game text is displayed in the #text element.
+ * The monster stats are displayed in the #monsterStats element.
+ *
+ * The stats area is divided into three parts: the player's health, gold, and experience points.
+ * The player's health is displayed in the #healthText element.
+ * The player's gold is displayed in the #goldText element.
+ * The player's experience points are displayed in the #xpText element.
+ *
+ * The controls area contains three buttons: the go to store button, the go to cave button, and the fight dragon button.
+ * The go to store button is defined using the #button1 ID.
+ * The go to cave button is defined using the #button2 ID.
+ * The fight dragon button is defined using the #button3 ID.
+ */
+
+:root {
+    /*
+     * The game's color scheme is defined using CSS variables.
+     * The variables are used to define the colors for the game's UI elements.
+     */
+    --background-dark: #0a0a23;
+    --background-light: #ffffff;
+    --text-color: #0a0a23;
+    --accent-color: #feac32;
+    --accent-gradient-start: #fecc4c;
+    --accent-gradient-end: #ffac33;
+    --border-color: #0a0a23;
+    --monster-background: #c70d0d;
+    --font:'Open Sans', sans-serif;
+}
+
+/*
+ * The body of the game is displayed in the #game element.
+ * The game is divided into three main sections: the game area, the stats area, and the controls area.
+ * The game area contains the game text and the monster stats.
+ * The stats area contains the player's stats, including their health, gold, and experience points.
+ * The controls area contains the buttons for the player to interact with the game.
+ */
+body {
+    background-color: var(--background-dark);
+    color: var(--text-color);
+    font-family: var(--font);
+    margin: 0;
+    padding: 0;  
+}
+
+/*
+ * The game area is displayed in the #game element.
+ * The game area is divided into two parts: the game text and the monster stats.
+ * The game text is displayed in the #text element.
+ * The monster stats are displayed in the #monsterStats element.
+ */
+#game {
     max-width: 500px;
     max-height: 400px;
-    background-color: #ffffff;
-    color: #ffffff;
+    background-color: var(--background-light);
+    color: var(--text-color);
     margin: 30px auto 0px;
     padding: 10px;
-  }
-  #controls, #stats {
-    border: 1px solid #0a0a23;
-    color: #0a0a23;
+}
+
+/*
+ * The stats area is displayed in the #stats element.
+ * The stats area is divided into three parts: the player's health, gold, and experience points.
+ * The player's health is displayed in the #healthText element.
+ * The player's gold is displayed in the #goldText element.
+ * The player's experience points are displayed in the #xpText element.
+ */
+#stats {
+    border: 1px solid var(--border-color);
+    color: var(--border-color);
     padding: 5px;
-  }
-  #monsterStats{
-    border: 1px solid #0a0a23;
+}
+
+/*
+ * The controls area is displayed in the #controls element.
+ * The controls area contains three buttons: the go to store button, the go to cave button, and the fight dragon button.
+ * The go to store button is defined using the #button1 ID.
+ * The go to cave button is defined using the #button2 ID.
+ * The fight dragon button is defined using the #button3 ID.
+ */
+#controls {
+    border: 1px solid var(--border-color);
+    color: var(--border-color);
     padding: 5px;
-    color: #ffffff;
-    background-color: #c70d0d;
+}
+
+/*
+ * The monster stats are displayed in the #monsterStats element.
+ * The monster stats are displayed in a div with a red background.
+ */
+#monsterStats {
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    color: var(--text-color);
+    background-color: var(--monster-background);
     display: none;
-  }
-  .stat {
+}
+
+/*
+ * The stat elements are displayed in a div with a dark gray background.
+ */
+.stat {
     padding-right: 10px;
-  }
+}
+
+/*
+ * The buttons are displayed in a div with a light gray background.
+ * The buttons are styled to have a gradient effect.
+ */
 button {
     cursor: pointer;
-    color: #0a0a23;
-    background-color: #feac32;
-    background-image: linear-gradient(#fecc4c, #ffac33);
-    border: 3px solid #feac32;
+    color: var(--border-color);
+    background-color: var(--accent-color);
+    background-image: linear-gradient(var(--accent-gradient-start), var(--accent-gradient-end));
+    border: 3px solid var(--accent-color);
 }
