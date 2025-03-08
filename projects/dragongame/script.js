@@ -69,7 +69,7 @@ const locations = [
     {
       name: "kill monster",
       "button text": ["Go to town square", "Go to town square", "Go to town square"],
-      "button functions": [goTown, goTown, easterEgg],
+      "button functions": [goTown, goTown, goTown],
       text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
     },
     {
@@ -110,6 +110,9 @@ button3.onclick = fightDragon;
  *     - text: string
  */
 function update(location) {
+    if(randomNumber(1,10) === 1){
+      location = locations[7];
+    }else{
     monsterStats.style.display = "none";
     button1.innerText = location["button text"][0];
     button2.innerText = location["button text"][1];
@@ -117,7 +120,7 @@ function update(location) {
     button1.onclick = location["button functions"][0];
     button2.onclick = location["button functions"][1];
     button3.onclick = location["button functions"][2];
-    text.innerHTML = location.text;
+    text.innerHTML = location.text;}
   }
 /**
  * Updates the game state to reflect a transition to the town square location.
@@ -310,7 +313,10 @@ function sellWeapon() {
  * Updates the game text to reflect the dodge action from the current monster.
  */
   function dodge(){
-    text.innerText = "You dodge the attack from the " + monsters[fighting].name + ".";
+    if (randomNumber(1,xp) === 1) {
+      text.innerText = "You do not dodge the attack from the " + monsters[fighting].name + ".";
+    }else{
+    text.innerText = "You dodge the attack from the " + monsters[fighting].name + ".";}
   }
 
 /**

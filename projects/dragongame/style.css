@@ -33,12 +33,28 @@
      */
     --background-dark: #0a0a23;
     --background-light: #ffffff;
-    --text-color: #ffffff;
+    --text-color: #0a0a23;
     --accent-color: #feac32;
     --accent-gradient-start: #fecc4c;
     --accent-gradient-end: #ffac33;
     --border-color: #0a0a23;
     --monster-background: #c70d0d;
+    --font:'Open Sans', sans-serif;
+}
+
+/*
+ * The body of the game is displayed in the #game element.
+ * The game is divided into three main sections: the game area, the stats area, and the controls area.
+ * The game area contains the game text and the monster stats.
+ * The stats area contains the player's stats, including their health, gold, and experience points.
+ * The controls area contains the buttons for the player to interact with the game.
+ */
+body {
+    background-color: var(--background-dark);
+    color: var(--text-color);
+    font-family: var(--font);
+    margin: 0;
+    padding: 0;  
 }
 
 /*
