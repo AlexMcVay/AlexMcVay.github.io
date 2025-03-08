@@ -20,14 +20,13 @@ This game is a simple, text-based adventure where you battle monsters to gain ex
 Althought there have been some changes made by me. Play the game to find out what.
 
 ## Features
-
--   Character creation and progression.
--   Multiple monster types with varying stats.
--   Combat system with attack and dodge mechanics.
--   Inventory system to store items.
--   Game over and win conditions.
--   Clear and engaging text-based interface.
--   Tweaks and enhancements to the original freeCodeCamp project.
+    -   Character progression.
+    -   Multiple monster types with varying stats.
+    -   Combat system with attack and dodge mechanics.
+    -   Inventory system to store items.
+    -   Game over and win conditions.
+    -   Clear and engaging text-based interface.
+    -   Tweaks and enhancements to the original freeCodeCamp project.
 
 ## How to Play
 
@@ -51,7 +50,6 @@ The game presents you with choices through text prompts. You'll be able to:
     -   Collect items and manage your inventory.
     -   Ultimately, defeat the dragon (or achieve another win condition).
 
-
 ## Technologies Used
 
 - HTML5
@@ -62,11 +60,9 @@ The game presents you with choices through text prompts. You'll be able to:
 
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-1.  Fork the repository.
-2.  Create a new branch: `git checkout -b feature/your-feature-name`
-3.  Make your changes.
-4.  Commit your changes: `git commit -am 'Add some feature'`
-5.  Push to the branch: `git push origin feature/your-feature-name`
-6.  Submit a pull request.
-
-
+    1.  Fork the repository.
+    2.  Create a new branch: `git checkout -b feature/your-feature-name`
+    3.  Make your changes.
+    4.  Commit your changes: `git commit -am 'Add some feature'`
+    5.  Push to the branch: `git push origin feature/your-feature-name`
+    6.  Submit a pull request.
