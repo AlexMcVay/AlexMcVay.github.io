@@ -3,117 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline Trial</title>
-    <style>
-        /* RESET RULES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-        :root {
-            --white: #fff;
-            --divider: lightgrey;
-            --body: #f5f7f8;
-        }
-
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        body {
-            background: var(--body);
-            font-size: 16px;
-            font-family: sans-serif;
-            padding-top: 40px;
-        }
-
-        .chart-wrapper {
-            max-width: 1150px;
-            padding: 0 10px;
-            margin: 0 auto;
-        }
-
-
-        /* CHART-VALUES
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-        .chart-wrapper .chart-values {
-            position: relative;
-            display: flex;
-            margin-bottom: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .chart-wrapper .chart-values li {
-            flex: 1;
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .chart-wrapper .chart-values li:not(:last-child) {
-            position: relative;
-        }
-
-        .chart-wrapper .chart-values li:not(:last-child)::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            height: 510px;
-            border-right: 1px solid var(--divider);
-        }
-
-
-        /* CHART-BARS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-        .chart-wrapper .chart-bars li {
-            position: relative;
-            color: var(--white);
-            margin-bottom: 15px;
-            font-size: 16px;
-            border-radius: 20px;
-            padding: 10px 20px;
-            width: 0;
-            opacity: 0;
-            /*transition: all 0.65s linear 0.2s, height 0.3s ease; /*loading transition*/
-            height: 50px;/* original height */
-            cursor: pointer;/*indicate clickable*/
-            overflow: hidden; /* hide overflow*/
-            &.description {
-                height: auto;
-                display: none;
-                /*transition: height 0.3s ease;
-                overflow: hidden;*/
-            }
-            &:hover {   
-            height: auto;
-                /*display: block;*/
-             transition: height 0.3s ease;
-             overflow: visible;
-            &.description {
-                display: block;
-                color: white;
-                }
-        }}
-
-         .description li{
-            list-style-type: disc;
-            margin-left: 40px;
-         }
-
-        @media screen and (max-width: 600px) {
-            .chart-wrapper .chart-bars li {
-                padding: 10px;
-            }
-        }
-
-    </style>
     <script>
         function createChart(e) {
             const years = document.querySelectorAll(".chart-values li");
@@ -159,157 +48,196 @@
          
     </script>
 <style>
-  ul.description li {
-    opacity: 1 !important;
-    transition: opacity 0.3s ease;
-  }
-  ul.description li:hover {
-    display: block !important;
-  }
-</style><style>
-  ul.description li {
-    opacity: 1 !important;
-    display: list-item !important;
-    transition: opacity 0.3s ease;
-  }
-  ul.description:hover li {
-    display: list-item !important;
-    opacity: 1 !important;
-  }
-</style><style>
-  ul.description li {
-    overflow: visible !important;
-  }
-  ul.description {
-    display: block !important;
-  }
-  ul.description:hover li {
-    display: list-item !important;
-    opacity: 1 !important;
-  }
-  ul.description + * {
-    display: block !important;
-    overflow: visible !important;
-  }
-</style><style>
-  ul.description li {
-    overflow: visible !important;
-    margin-bottom: 0px !important;
-    opacity: 0 !important;
-    transition: opacity 0.3s ease;
-  }
-  ul.description {
-    display: block !important;
-  }
-  ul.description:hover li {
-    display: list-item !important;
-    opacity: 1 !important;
-  }
-  ul.description + * {
-    display: block !important;
-    overflow: visible !important;
-    margin-bottom: 0px !important;
-  }
-</style><style>
-  ul.description li {
-    overflow: visible !important;
-    margin-bottom: 0px !important;
-    opacity: 0 !important;
-    transition: opacity 0.3s ease;
-  }
-  ul.description {
-    display: block !important;
-  }
-  ul.description + * {
-    display: block !important;
-    overflow: visible !important;
-    margin-bottom: 0px !important;
-  }
-  ul.description + *:hover ul.description li {
-    display: list-item !important;
-    opacity: 1 !important;
-  }
+      /* RESET RULES
+      –––––––––––––––––––––––––––––––––––––––––––––––––– */
+      @import url("style.css");
+      
+      * {
+          padding: 0;
+          margin: 0;
+          box-sizing: border-box;
+      }
+
+      ul {
+          list-style: none;
+      }
+
+      a {
+          text-decoration: none;
+          color: inherit;
+      }
+
+      body {
+          background: var(--body);
+          font-size: 16px;
+          font-family: sans-serif;
+          padding-top: 40px;
+          color: var(--text-color); /*use text color here*/
+      }
+
+      .chart-wrapper {
+          max-width: 1150px;
+          padding: 0 10px;
+          margin: 0 auto;
+      }
+
+
+      /* CHART-VALUES
+      –––––––––––––––––––––––––––––––––––––––––––––––––– */
+      .chart-wrapper .chart-values {
+          position: relative;
+          display: flex;
+          margin-bottom: 20px;
+          font-weight: bold;
+          font-size: 1.2rem;
+          color: var(--accent-color) /*use text color here*/
+      }
+
+      .chart-wrapper .chart-values li {
+          flex: 1;
+          min-width: 80px;
+          text-align: center;
+          color: var(--primary-color);
+      }
+
+      .chart-wrapper .chart-values li:not(:last-child) {
+          position: relative;
+      }
+
+      .chart-wrapper .chart-values li:not(:last-child)::before {
+          content: '';
+          position: absolute;
+          right: 0;
+          height: 510px;
+          border-right: 1px solid var(--divider);
+      }
+
+
+      /* CHART-BARS
+      –––––––––––––––––––––––––––––––––––––––––––––––––– */
+      .chart-wrapper .chart-bars li {
+          position: relative;
+          color: var(--body);
+          margin-bottom: 15px;
+          font-size: 16px;
+          border-radius: 20px;
+          padding: 10px 20px;
+          width: 0;
+          opacity: 0;
+          height: 50px;/* original height */
+          cursor: pointer;/*indicate clickable*/
+          overflow: hidden; /* hide overflow*/
+          background-color: var(--primary-color); /* default background color */
+          color: white; /*use text color here*/
+          transition: none;
+      }
+
+       .chart-wrapper .chart-bars li:hover {   
+          height: auto;
+           transition: height 0.3s ease;
+           overflow: visible;
+      }
+
+       .chart-wrapper .chart-bars li:hover ul.description li{
+        display: list-item;
+        opacity: 1;
+       }
+
+       .description li{
+          list-style-type: disc;
+          margin-left: 40px;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          overflow: visible !important;
+       }
+
+      @media screen and (max-width: 600px) {
+          .chart-wrapper .chart-bars li {
+              padding: 10px;
+          }
+      }
+    
 </style></head>
 
-<body>
-    <div class="chart-wrapper">
-        <ul class="chart-values">
-            <li>2016</li>
-            <li>2017</li>
-            <li>2018</li>
-            <li>2019</li>
-            <li>2020</li>
-            <li>2021</li>
-            <li>2022</li>
-            <li>2023</li>
-            <li>2024</li>
-            <li>2025</li>
-        </ul>
-        <ul class="chart-bars">
-            <li data-duration="2023-2025" data-color="#b03532" style="left: 0px; width: 986px; background-color: rgb(176, 53, 50); opacity: 1;">
-    <h3 class="job">Naval Surface Warfare Center (NSWC) VTEC Intern (May 2023 - Present) Philadelphia, Pennsylvania, United States</h3>
-        <p class="description">Facilitated and conducted a highly engaging and educational humanitarian warfare games promoting awareness and understanding of complex global issues related to conflict, humanitarian aid, critical thinking, and peacekeeping efforts.</p>
-        <p class="description">Conducted extensive playtesting and user feedback analysis to iterate and improve game mechanics.</p>
-        <p class="description">Optimized code and assets to ensure smooth performance on various gaming platforms.</p>
-        <p class="description">Conducted thorough research on historical battles, military strategies, and contemporary warfare tactics to inform game design.</p>
-        <p class="description">Received accolades for creating innovative and cutting-edge war game experiences that were praised for their realism and effectiveness in training exercises.</p>
-        <p class="description">Collaborated with military experts and personnel to incorporate realistic simulation elements into war games for maximum educational value.</p>
-        <p class="description">asdsadsa</p>
-</li>
-<li data-duration="2023" data-color="#b03532" style="left: 493px; width: 493px; background-color: rgb(176, 53, 50); opacity: 1;">
-    <h3 class="job">Know it All Tutors Private Tutor (March 2023 - October 2023)</h3>
+    <body>
+        <div class="chart-wrapper">
+            <ul class="chart-values">
+                <li>2016</li>
+                <li>2017</li>
+                <li>2018</li>
+                <li>2019</li>
+                <li>2020</li>
+                <li>2021</li>
+                <li>2022</li>
+                <li>2023</li>
+                <li>2024</li>
+                <li>2025</li>
+            </ul>
+            <ul class="chart-bars">
+                <li data-duration="2023-2025"  style="left: 0px; width: 986px; opacity: 1;">
+        <h3 class="job">Naval Surface Warfare Center (NSWC) VTEC Intern (May 2023 - Present) Philadelphia, Pennsylvania, United States</h3>
+            <p class="description">Facilitated and conducted a highly engaging and educational humanitarian warfare games promoting awareness and understanding of complex global issues related to conflict, humanitarian aid, critical thinking, and peacekeeping efforts.</p>
+            <p class="description">Conducted extensive playtesting and user feedback analysis to iterate and improve game mechanics.</p>
+            <p class="description">Optimized code and assets to ensure smooth performance on various gaming platforms.</p>
+            <p class="description">Conducted thorough research on historical battles, military strategies, and contemporary warfare tactics to inform game design.</p>
+            <p class="description">Received accolades for creating innovative and cutting-edge war game experiences that were praised for their realism and effectiveness in training exercises.</p>
+            <p class="description">Collaborated with military experts and personnel to incorporate realistic simulation elements into war games for maximum educational value.</p>
+            <p class="description">asdsadsa</p>
+    </li>
+    <li data-duration="2023"  style="left: 493px; width: 493px; opacity: 1;">
+        <h3 class="job">Know it All Tutors Private Tutor (March 2023 - October 2023)</h3>
+        
+            <p class="description">Implemented engaging teaching methods and instructional strategies to enhance students' comprehension and retention of course material.</p>
+            <p class="description">Monitored and tracked students' progress through regular assessments and feedback to identify areas for improvement and provide additional support.</p>
+            <p class="description">Demonstrated a proven track record of helping students achieve academic success and improve their confidence in the subject matter.</p>
+            <p class="description">Facilitated one-on-one tutoring sessions for students in computer science courses, focusing on topics such as programming languages, algorithms, and data structures.</p>
+            <p class="description">Assisted students in completing homework assignments, projects, and coding exercises, providing guidance and feedback to enhance their problem-solving skills.</p>
+            <p class="description">Conducted code reviews and debugging sessions to help students identify and correct errors in their programs, promoting a deeper understanding of programming concepts.</p>
+    </li>
+    <li data-duration="2020-2021"  style="left: 0px; width: 493px; opacity: 1;"> 
+        <h3 class="job">City of Fort Walton Beach Temporary Financial Assistant (August 2020 - December 2020)</h3>
+        
+            <p class="description">Created a Warehouse inventory system using SQL, VBA, and Advanced Microsoft Macros to determine the usability of inventory, determine needs for new inventory, and purge inventory.</p>
+            <p class="description">Performed routine calculations to produce analyses and reports as needed.</p>
+            <p class="description">Collected and entered data for various financial spreadsheets using various coding languages.</p>
+            <p class="description">Attended and presented at various finance department and company-wide meetings, thus assisting with financial reporting to managers and senior executives.</p>
+            <p class="description">Suggested changes or improvements to increase accuracy, efficiency, and cost reductions.</p>
+            <p class="description">Worked closely with relevant departments to ensure products purchased are in the taxpayers' best interest.</p>
+            <p class="description">Maintained current awareness of industry market trends. Conducted competitor analysis to identify popular products.</p>
+            <p class="description">Kept accurate records of purchases made using various programming languages.</p>
+            <p class="description">Engaged in ad hoc projects to support financial analysis and decision-making processes.</p>
+        
+    </li>
+    <li data-duration="2016-2020" style="left: 0px; width: 986px; opacity: 1;">
+        <h3 class="job">United States Air Force</h3>
+        
+            <p class="description">Developed and implemented an innovative inventory system, now utilized internationally, which improved inventory tracking accuracy by 30%.</p>
+            <p class="description">Spearheaded the creation of a new inventory protocol that reduced system errors by 25%, significantly enhancing operational efficiency.</p>
+            <p class="description">Analyzed and forecasted inventory requirements for the egress mechanic shop to ensure optimal stock levels while reducing excess expenditures.</p>
+            <p class="description">Designed and executed training programs for the new PEB System, fostering a knowledgeable and skilled team.</p>
+            <p class="description">Supported and trained subordinates in inventory management programs, promoting a culture of continuous learning and improvement.</p>
+            <p class="description">Oversaw the tracking of all incoming and expended PEB items, utilizing SQL queries to extract data and generate insightful reports for decision-making.</p>
+            <p class="description">Developed SQL queries to enhance inventory data analysis, aligning with healthcare data management standards.</p>
+            <p class="description">Conducted comprehensive data audits to ensure compliance across all inventory processes.</p>
+            <p class="description">Collaborated in the update and design of F-35 ejection systems, enhancing the safety and reliability of critical military equipment.</p>
+            <p class="description">Served as an explosive and electric mechanic for various aircraft, including F-35, F-16, F-15, and F-22, ensuring operational readiness and performance.</p>
+            <p class="description">Supported mission-critical operations and adeptly managed funds for airmen during travel, demonstrating strong financial stewardship and team coordination.</p>
+            <p class="description">Developed and led a team of 5 airmen in safety program initiatives, achieving a 20% improvement in efficiency by redesigning hazardous waste protocols.</p>
+            <p class="description">Spearheaded a safety program overhaul that resulted in a 15% reduction in incidents and earned a commendation for excellence in maintaining high safety standards.</p>
+            <p class="description">Demonstrated proficiency in Microsoft Office Suite and leveraged SQL for data management and queries, contributing to effective communication and team collaboration.</p>
+            <p class="description">Egress Technician (December 2016 - December 2020)</p>
+            <p class="description">Assisted in the update and design of F-35 ejection systems.</p>
+            <p class="description">Served as an explosive and electric mechanic for various aircraft including: F-35, F-16, F-15, and F-22.</p>
+            <p class="description">Traveled for missions and managed funds for airmen while traveling.</p>
+            <p class="description">Managed Safety programs and Hazardous waste.</p>
+            <p class="description">Proficiency in Microsoft Office Suite.</p>
+        
+    </li>
+            </ul>
+        </div>
     
-        <p class="description">Implemented engaging teaching methods and instructional strategies to enhance students' comprehension and retention of course material.</p>
-        <p class="description">Monitored and tracked students' progress through regular assessments and feedback to identify areas for improvement and provide additional support.</p>
-        <p class="description">Demonstrated a proven track record of helping students achieve academic success and improve their confidence in the subject matter.</p>
-        <p class="description">Facilitated one-on-one tutoring sessions for students in computer science courses, focusing on topics such as programming languages, algorithms, and data structures.</p>
-        <p class="description">Assisted students in completing homework assignments, projects, and coding exercises, providing guidance and feedback to enhance their problem-solving skills.</p>
-        <p class="description">Conducted code reviews and debugging sessions to help students identify and correct errors in their programs, promoting a deeper understanding of programming concepts.</p>
-</li>
-<li data-duration="2020" data-color="#b03532" style="left: 0px; width: 493px; background-color: rgb(176, 53, 50); opacity: 1;"> 
-    <h3 class="job">City of Fort Walton Beach Temporary Financial Assistant (August 2020 - December 2020)</h3>
     
-        <p class="description">Created a Warehouse inventory system using SQL, VBA, and Advanced Microsoft Macros to determine the usability of inventory, determine needs for new inventory, and purge inventory.</p>
-        <p class="description">Performed routine calculations to produce analyses and reports as needed.</p>
-        <p class="description">Collected and entered data for various financial spreadsheets using various coding languages.</p>
-        <p class="description">Attended and presented at various finance department and company-wide meetings, thus assisting with financial reporting to managers and senior executives.</p>
-        <p class="description">Suggested changes or improvements to increase accuracy, efficiency, and cost reductions.</p>
-        <p class="description">Worked closely with relevant departments to ensure products purchased are in the taxpayers' best interest.</p>
-        <p class="description">Maintained current awareness of industry market trends. Conducted competitor analysis to identify popular products.</p>
-        <p class="description">Kept accurate records of purchases made using various programming languages.</p>
-        <p class="description">Engaged in ad hoc projects to support financial analysis and decision-making processes.</p>
     
-</li>
-<li data-duration="2016-2020" data-color="#b03532" style="left: 0px; width: 986px; background-color: rgb(176, 53, 50); opacity: 1;">
-    <h3 class="job">United States Air Force</h3>
+    </body>
+    </html>
     
-        <p class="description">Developed and implemented an innovative inventory system, now utilized internationally, which improved inventory tracking accuracy by 30%.</p>
-        <p class="description">Spearheaded the creation of a new inventory protocol that reduced system errors by 25%, significantly enhancing operational efficiency.</p>
-        <p class="description">Analyzed and forecasted inventory requirements for the egress mechanic shop to ensure optimal stock levels while reducing excess expenditures.</p>
-        <p class="description">Designed and executed training programs for the new PEB System, fostering a knowledgeable and skilled team.</p>
-        <p class="description">Supported and trained subordinates in inventory management programs, promoting a culture of continuous learning and improvement.</p>
-        <p class="description">Oversaw the tracking of all incoming and expended PEB items, utilizing SQL queries to extract data and generate insightful reports for decision-making.</p>
-        <p class="description">Developed SQL queries to enhance inventory data analysis, aligning with healthcare data management standards.</p>
-        <p class="description">Conducted comprehensive data audits to ensure compliance across all inventory processes.</p>
-        <p class="description">Collaborated in the update and design of F-35 ejection systems, enhancing the safety and reliability of critical military equipment.</p>
-        <p class="description">Served as an explosive and electric mechanic for various aircraft, including F-35, F-16, F-15, and F-22, ensuring operational readiness and performance.</p>
-        <p class="description">Supported mission-critical operations and adeptly managed funds for airmen during travel, demonstrating strong financial stewardship and team coordination.</p>
-        <p class="description">Developed and led a team of 5 airmen in safety program initiatives, achieving a 20% improvement in efficiency by redesigning hazardous waste protocols.</p>
-        <p class="description">Spearheaded a safety program overhaul that resulted in a 15% reduction in incidents and earned a commendation for excellence in maintaining high safety standards.</p>
-        <p class="description">Demonstrated proficiency in Microsoft Office Suite and leveraged SQL for data management and queries, contributing to effective communication and team collaboration.</p>
-        <p class="description">Egress Technician (December 2016 - December 2020)</p>
-        <p class="description">Assisted in the update and design of F-35 ejection systems.</p>
-        <p class="description">Served as an explosive and electric mechanic for various aircraft including: F-35, F-16, F-15, and F-22.</p>
-        <p class="description">Traveled for missions and managed funds for airmen while traveling.</p>
-        <p class="description">Managed Safety programs and Hazardous waste.</p>
-        <p class="description">Proficiency in Microsoft Office Suite.</p>
-    
-</li>
-        </ul>
-    </div>
-
-
-
-</body>
-</html>
-
