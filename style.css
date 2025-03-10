@@ -42,7 +42,6 @@ nav ul {
 
 
 .chart-wrapper {
-  max-width: 1150px;
   padding: 0 10px;
   margin: 0 auto;
   overflow-x: auto;
@@ -108,8 +107,4 @@ nav ul {
   padding: 10px;
   text-align: right;
   color: var(--black);
-}
-
-.page-footer span {
-  color: #e31b23;
 }
