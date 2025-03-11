@@ -1,36 +1,43 @@
-// Sticky Header
-$(window).scroll(function() {
 
-    if ($(window).scrollTop() > 100) {
-        $('.main_h').addClass('sticky');
-    } else {
-        $('.main_h').removeClass('sticky');
-    }
-});
 
-// Mobile Navigation
-$('.mobile-toggle').click(function() {
-    if ($('.main_h').hasClass('open-nav')) {
-        $('.main_h').removeClass('open-nav');
-    } else {
-        $('.main_h').addClass('open-nav');
-    }
-});
+function resizeIframe(iframe) {
+  iframe.style.height = "auto"; // Reset height to auto to allow it to shrink
+  const newHeight = iframe.contentWindow.document.body.scrollHeight;
+  iframe.style.height = newHeight + "px"; // Set new height
+}
+// Wait for the DOM to fully load
+document.addEventListener('DOMContentLoaded', function() {
+  const iframe = document.getElementById('timelineIframe');
+-
+-  // Add event listeners
+-  iframe.addEventListener('load', () => resizeIframe(iframe)); // Resize when the iframe loads
+-  window.addEventListener('resize', () => resizeIframe(iframe)); // Resize when the window is resized
++  
++  iframe.addEventListener('load', () => {
++    resizeIframe(iframe); // Initial resize when iframe loads
 
-$('.main_h li a').click(function() {
-    if ($('.main_h').hasClass('open-nav')) {
-        $('.navigation').removeClass('open-nav');
-        $('.main_h').removeClass('open-nav');
-    }
-});
++    // Set up MutationObserver inside the iframe
++    const observer = new MutationObserver(() => {
++      resizeIframe(iframe); // Resize whenever content changes
++    });
++
++    // Start observing the iframe's body for changes
++    observer.observe(iframe.contentWindow.document.body, {
++      childList: true, // Observe direct children
++      subtree: true,   // Observe all descendants
++      attributes: true // Observe attribute changes
++    });
++
++    // Resize on window resize (for good measure)
++    window.addEventListener('resize', () => resizeIframe(iframe));
++  });
+ });
 
-// navigation scroll lijepo radi materem
-$('nav a').click(function(event) {
-    var id = $(this).attr("href");
-    var offset = 70;
-    var target = $(id).offset().top - offset;
-    $('html, body').animate({
-        scrollTop: target
-    }, 500);
-    event.preventDefault();
-});
+ function sendEmail() {
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var message = document.getElementById("message").value;
+  var subject = "New message from " + name;
+  var mailtoLink = "mailto:alya.mcvay@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
+  window.location.href = mailtoLink;
+}
