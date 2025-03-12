@@ -49,7 +49,23 @@
         
         <!-- TODO: #21 Add JavaScript functionality to sort projects by technology -->
     </section>
+    <section id="Projects">
+        <h2>Projects and Skills</h2>
+        <div class="filter-buttons">
+            <button onclick="filterCards('all')" class="active">All</button>
+            <button onclick="filterCards('tech')">Tech</button>
+            <button onclick="filterCards('business')">Business</button>
+            <button onclick="filterCards('art')">Art</button>
+        </div>
     
+        <div class="cards-container">
+            <div class="card" data-tags="tech business">Card 1 (Tech, Business)</div>
+            <div class="card" data-tags="business">Card 2 (Business)</div>
+            <div class="card" data-tags="tech">Card 3 (Tech)</div>
+            <div class="card" data-tags="art">Card 4 (Art)</div>
+            <div class="card" data-tags="tech art">Card 5 (Tech, Art)</div>
+        </div>
+    </section>
     <section id="timeline">
         <h2>Timeline</h2>
         <iframe src="timelinetrial.html" width="100%" height="600px" frameborder="0" title="Career Timeline"></iframe>

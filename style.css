@@ -99,6 +99,41 @@ nav ul {
   }
 }
 
+/* PROJECTS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.filter-buttons {
+  margin-bottom: 20px;
+}
+.filter-buttons button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--background-color);
+  border-radius: 5px;
+}
+.filter-buttons button.active {
+  background-color: var(--secondary-color);
+  color: var(--secondary-text-color);
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+.card {
+  width: 200px;
+  padding: 15px;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  text-align: center;
+  display: block;
+}
+.hidden {
+  display: none;
+}
+
 
 /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -106,5 +141,5 @@ nav ul {
   font-size: 0.85rem;
   padding: 10px;
   text-align: right;
-  color: var(--black);
+  color: var(--text-color);
 }
