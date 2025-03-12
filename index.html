@@ -9,61 +9,90 @@
 </head>
 <body>
     <header>
-        <h1>Alex McVay's Portfolio</h1>
+        <h1>Hello! I'm Alex McVay 👋</h1>
+        <h2> I am a Front-End Developer</h2><!-- TODO: add typeing effect -->
+        <!-- <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button> TODO: add dark mode -->
+        <a href="resume.pdf" target="_blank"><button>Download my Resume</button> </a>
         <nav>
             <ul>
-                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#timeline">Timeline</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi, I'm Alex McVay! A passionate programmer specializing in cybersecurity, AI, and cloud computing. I love building efficient and secure applications.</p>
-        <button class="resume-button" href="resume.pdf">Download Resume</button>
-        <!-- TODO: #16 Add Resume -->
-    </section>
-    
-    <section id="projects" script="projects-script.js">
-        <h2>Projects</h2>
-        <!--
-        <div class="project" data-tech="JavaScript, React">
-            <img src="project-logo.png" alt="Project Logo" class="project-logo">
-            <h3>Cool Project Name</h3>
-            <p>Description of the project and technologies used: JavaScript, React.</p>
-            <img src="project-screenshot.png" alt="Project Screenshot" class="project-screenshot">
-            <a href="#">View Project</a>
-        </div>
-        -->
-        <!-- DONE: #22 fix data-tech attribute -->
-        <div class="project" data-tech="JavaScript, HTML5, CSS3" href="https://alexmcvay.github.io/DragonFighter.github.io/">
-            <img src="/images/dragon-game-logo.png" alt="Project Logo" class="project-logo">
-            <h3>Dragon Fighting RPG</h3>
-            <p>This is a text-based monster fighting game inspired by the role-playing game.</p>
-            <div class="tech-logos"></div> <!-- Container for tech logos -->
-            <img src="project-screenshot.png" alt="Project Screenshot" class="project-screenshot">
-        </div>
-        
-        <!-- TODO: #21 Add JavaScript functionality to sort projects by technology -->
-    </section>
+      
     <section id="Projects">
         <h2>Projects and Skills</h2>
         <div class="filter-buttons">
-            <button onclick="filterCards('all')" class="active">All</button>
-            <button onclick="filterCards('tech')">Tech</button>
-            <button onclick="filterCards('business')">Business</button>
-            <button onclick="filterCards('art')">Art</button>
+        <button data-tag="all">All</button> <!-- All projects button DO NOT DELETE -->
+            <!-- Template of buttons 
+             <button data-tag="tech">Tech</button> 
+             -->
+            <button data-tag="design">Design</button> <!-- Design projects button -->
+            <button data-tag="UI/UX">UI/UX</button> <!-- UI/UX projects button -->
+            <button data-tag="web">Web</button> <!-- Web projects button -->
+            <button data-tag="mobile">Mobile</button> <!-- Mobile projects button -->
+            <button data-tag="data visualization">Data visualization</button> <!-- Data visualization projects button -->
+            <button data-tag="database">Database</button> <!-- Database projects button -->
+            <button data-tag="scripting">Scripting</button> <!-- Scripting projects button -->
+            <button data-tag="HTML5">HTML5</button> <!-- HTML5 projects button -->
+            <button data-tag="CSS3">CSS3</button> <!-- CSS3 projects button -->
+            <button data-tag="JavaScript">JavaScript</button> <!-- JavaScript projects button -->
+            <button data-tag="React">React</button> <!-- React projects button -->
+            <button data-tag="Python">Python</button> <!-- Python projects button -->
+            <button data-tag="Java">Java</button> <!-- Java projects button -->
+            <button data-tag="PHP">PHP</button> <!-- PHP projects button -->
+            <button data-tag="SQL">SQL</button> <!-- SQL projects button -->
+            <button data-tag="mermaid">Mermaid</button> <!-- Mermaid projects button -->
+            <button data-tag="Postman">Postman</button> <!-- Postman projects button -->
+            <button data-tag="Git">Git</button> <!-- Git projects button -->
+            <button data-tag="markdown">Markdown</button> <!-- Markdown projects button -->
+            <button data-tag="Certification">Certification</button> <!-- Certification projects button -->
         </div>
-    
-        <div class="cards-container">
-            <div class="card" data-tags="tech business">Card 1 (Tech, Business)</div>
-            <div class="card" data-tags="business">Card 2 (Business)</div>
-            <div class="card" data-tags="tech">Card 3 (Tech)</div>
-            <div class="card" data-tags="art">Card 4 (Art)</div>
-            <div class="card" data-tags="tech art">Card 5 (Tech, Art)</div>
+      
+        <div class="cards">
+            <!-- Template of cards
+             <div class="card" data-tags=" design , html5 ">
+                <a href="https://alexmcvay.github.io/DragonFighter.github.io/">
+                    <h3>DragonFighter RPG</h3>
+                    <p>A text-based monster fighting role-playing game.</p>
+                </a>
+            </div>
+            -->
+            <div class="card" data-tags=" design , css , html5 , Javascript , scripting , frontend , game , web , UI/UX , markdown , mobile ">
+                <a href="https://alexmcvay.github.io/DragonFighter.github.io/">
+                    <h3>DragonFighter RPG</h3>
+                    <p>A text-based monster fighting role-playing game.</p>
+                </a>
+            </div>
+            <div class="card" data-tags=" design , css , html , javascript , scripting , frontend , web , UI/UX , markdown , mobile ">
+                <a href="https://alexmcvay.github.io/Portfolio/">
+                    <h3>Portfolio</h3>
+                    <p>This portfolio website.</p>
+                </a>
+            </div>
+            <div class="card" data-tags=" UI/UX , design , css , html5 , javascript , frontend , web , react ">
+                <a href="https://studentcalendar.netlify.app/">
+                    <h3>Student Calendar</h3>
+                    <p>A student calendar app.</p>
+                </a>
+            </div>
+            <div class="card" data-tags=" UI/UX , design , css , html5 , javascript , frontend , web , mobile ">
+                <a href="https://alexmcvay.github.io/Contact-Card/">
+                    <h3>LinkTree Clone</h3>
+                    <p>A linktree clone with a Download button for contact info.</p>
+                </a>
+            </div>
+            <div class="card" data-tags=" Database, SQL ,Data visualization , mermaid ">
+                <a href="https://github.com/AlexMcVay/UBER-Data">
+                    <h3>UBER-Data</h3>
+                    <p> A data analysis clone of UBER</p>
+                </a>
+            </div>
+
+
+            
         </div>
     </section>
     <section id="timeline">

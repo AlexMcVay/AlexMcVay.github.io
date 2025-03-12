@@ -19,27 +19,25 @@ body {
     color: var(--primary-color);
 }
 header {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     padding: 1rem 0;
     text-align: center;
 }
+nav{
+  width: 100%;
+}
 nav ul {
+    display: flex;
+    color: var(--background-color);
     list-style: none;
     padding: 0;
 }
 
-.tech-logos {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+section {
+    padding: 1rem;
+    text-align: left;
 }
-
-.tech-icon {
-  width: 30px; /* Adjust as needed */
-  height: 30px;
-}
-
 
 .chart-wrapper {
   padding: 0 10px;
@@ -99,10 +97,12 @@ nav ul {
   }
 }
 
-/* PROJECTS
+/* PROJECT CARDS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .filter-buttons {
   margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
 }
 .filter-buttons button {
   margin: 5px;
@@ -111,24 +111,41 @@ nav ul {
   border: none;
   background-color: var(--background-color);
   border-radius: 5px;
+  outline-color: var(--primary-color);
 }
 .filter-buttons button.active {
-  background-color: var(--secondary-color);
-  color: var(--secondary-text-color);
+  background-color: var(--primary-color);
+  color: white;
 }
-.cards-container {
+.cards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping if necessary */
+  gap: 20px; /* Adds space between cards */
+  justify-content: center; /* Centers cards in the container */
+
 }
 .card {
   width: 200px;
   padding: 15px;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   display: block;
+  cursor: pointer;
+}
+.card-link {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  background-color: #3e8e41;
 }
 .hidden {
   display: none;
