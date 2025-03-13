@@ -25,71 +25,79 @@
     <section id="Projects">
         <h2>Projects and Skills</h2>
         <div class="filter-buttons">
-        <button data-tag="all">All</button> <!-- All projects button DO NOT DELETE -->
-            <!-- Template of buttons 
-             <button data-tag="tech">Tech</button> 
-             -->
-            <button data-tag="design">Design</button> <!-- Design projects button -->
-            <button data-tag="UI/UX">UI/UX</button> <!-- UI/UX projects button -->
-            <button data-tag="web">Web</button> <!-- Web projects button -->
-            <button data-tag="mobile">Mobile</button> <!-- Mobile projects button -->
-            <button data-tag="data visualization">Data visualization</button> <!-- Data visualization projects button -->
-            <button data-tag="database">Database</button> <!-- Database projects button -->
-            <button data-tag="scripting">Scripting</button> <!-- Scripting projects button -->
-            <button data-tag="HTML5">HTML5</button> <!-- HTML5 projects button -->
-            <button data-tag="CSS3">CSS3</button> <!-- CSS3 projects button -->
-            <button data-tag="JavaScript">JavaScript</button> <!-- JavaScript projects button -->
-            <button data-tag="React">React</button> <!-- React projects button -->
-            <button data-tag="Python">Python</button> <!-- Python projects button -->
-            <button data-tag="Java">Java</button> <!-- Java projects button -->
-            <button data-tag="PHP">PHP</button> <!-- PHP projects button -->
-            <button data-tag="SQL">SQL</button> <!-- SQL projects button -->
-            <button data-tag="mermaid">Mermaid</button> <!-- Mermaid projects button -->
-            <button data-tag="Postman">Postman</button> <!-- Postman projects button -->
-            <button data-tag="Git">Git</button> <!-- Git projects button -->
-            <button data-tag="markdown">Markdown</button> <!-- Markdown projects button -->
-            <button data-tag="Certification">Certification</button> <!-- Certification projects button -->
-        </div>
-      
-        <div class="cards">
-            <!-- Template of cards
-             <div class="card" data-tags=" design , html5 ">
-                <a href="https://alexmcvay.github.io/DragonFighter.github.io/">
-                    <h3>DragonFighter RPG</h3>
-                    <p>A text-based monster fighting role-playing game.</p>
-                </a>
+            <button class="button" data-tag="all">All</button>
+            <!-- All projects button DO NOT DELETE -->
+            <button class="button" data-tag="design">Design</button> <!-- Design projects button -->
+            <button class="button" data-tag="ui/ux">UI/UX</button> <!-- UI/UX projects button -->
+            <button class="button" data-tag="database">Database</button> <!-- Database projects button -->
+            <button class="button" data-tag="scripting">Scripting</button> <!-- Scripting projects button -->
+            <button class="button" data-tag="html5">HTML5</button> <!-- HTML5 projects button -->
+            <button class="button" data-tag="css3">CSS3</button> <!-- CSS3 projects button -->
+            <button class="button" data-tag="javascript">JavaScript</button> <!-- JavaScript projects button -->
+            <button class="button" data-tag="frontend">Frontend</button>
+            <button class="button" data-tag="game">Game</button>
+            <button class="button" data-tag="web">Web</button>
+            <button class="button" data-tag="markdown">Markdown</button>
+            <button class="button" data-tag="mobile">Mobile</button>
+            <button class="button" data-tag="react">React</button>
+
+          </div>
+          
+          <div class="cards">
+            <div
+              class="card"
+              data-tags="design,css3,html5,Javascript,scripting,frontend,game,web,ui/ux,markdown,mobile"
+            >
+              <a href="https://alexmcvay.github.io/DragonFighter.github.io/">
+                <h3>DragonFighter RPG</h3>
+                <p>A text-based monster fighting role-playing game.</p>
+              </a>
             </div>
-            -->
-            <div class="card" data-tags=" design , css , html5 , Javascript , scripting , frontend , game , web , UI/UX , markdown , mobile ">
-                <a href="https://alexmcvay.github.io/DragonFighter.github.io/">
-                    <h3>DragonFighter RPG</h3>
-                    <p>A text-based monster fighting role-playing game.</p>
-                </a>
+            <div
+              class="card"
+              data-tags="design,css3,html5,javascript,scripting,frontend,web,ui/ux,markdown,mobile "
+            >
+              <a href="https://alexmcvay.github.io/Portfolio/">
+                <h3>Portfolio</h3>
+                <p>This portfolio website.</p>
+              </a>
             </div>
-            <div class="card" data-tags=" design , css , html , javascript , scripting , frontend , web , UI/UX , markdown , mobile ">
-                <a href="https://alexmcvay.github.io/Portfolio/">
-                    <h3>Portfolio</h3>
-                    <p>This portfolio website.</p>
-                </a>
+            <div
+              class="card"
+              data-tags="ui/ux,design,css3,html5,javascript,frontend,web,react"
+            >
+              <a href="https://studentcalendar.netlify.app/">
+                <h3>Student Calendar</h3>
+                <p>A student calendar app.</p>
+              </a>
             </div>
-            <div class="card" data-tags=" UI/UX , design , css , html5 , javascript , frontend , web , react ">
-                <a href="https://studentcalendar.netlify.app/">
-                    <h3>Student Calendar</h3>
-                    <p>A student calendar app.</p>
-                </a>
+            <div
+              class="card"
+              data-tags="ui/ux,design,css3,html5,javascript,frontend,web,mobile"
+            >
+              <a href="https://alexmcvay.github.io/Contact-Card/">
+                <h3>LinkTree Clone</h3>
+                <p>A linktree clone with a Download button for contact info.</p>
+              </a>
             </div>
-            <div class="card" data-tags=" UI/UX , design , css , html5 , javascript , frontend , web , mobile ">
-                <a href="https://alexmcvay.github.io/Contact-Card/">
-                    <h3>LinkTree Clone</h3>
-                    <p>A linktree clone with a Download button for contact info.</p>
-                </a>
+            <div class="card" data-tags="database,sql,mermaid ">
+              <a href="https://github.com/AlexMcVay/UBER-Data">
+                <h3>UBER-Data</h3>
+                <p>A data analysis clone of UBER</p>
+              </a>
             </div>
-            <div class="card" data-tags=" Database, SQL ,Data visualization , mermaid ">
-                <a href="https://github.com/AlexMcVay/UBER-Data">
-                    <h3>UBER-Data</h3>
-                    <p> A data analysis clone of UBER</p>
-                </a>
+            <div
+              class="card"
+              data-tags="ui/ux,design,css3,html5,javascript,frontend,web,mobile "
+            >
+              <a href="https://alexandra-mcvay.netlify.app/">
+                <h3>Tic Tac Toe</h3>
+                <p>A game of Tic Tac Toe</p>
+              </a>
             </div>
+          </div>
+          
+        
 
 
             

@@ -38,14 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Attach event listeners to filter buttons
-  const filterButtons = document.querySelectorAll(".filter-buttons button");
-  filterButtons.forEach(button => {
-      button.addEventListener("click", function () {
-          filterCards(this.getAttribute("data-tag"), this);
-      });
-  });
-});
+
 
 /**
 * Send an email to the portfolio owner with the given name, email, and message.
@@ -70,6 +63,17 @@ function sendEmail() {
   window.location.href = mailtoLink;
 }
 
+
+  // Attach event listeners to filter buttons
+  const filterButtons = document.querySelectorAll(".filter-buttons button");
+  filterButtons.forEach(button => {
+      button.addEventListener("click", function () {
+          filterCards(this.getAttribute("data-tag"), this);
+      });
+  });
+});
+
+
 /**
 * Filters and displays cards based on the specified tag.
 *
@@ -89,7 +93,7 @@ function filterCards(tag, button) {
 
   // Filter cards
   cards.forEach(card => {
-      let cardTags = card.getAttribute("data-tags").split(" ");
+      let cardTags = card.getAttribute("data-tags").split(",");
       if (tag === "all" || cardTags.includes(tag)) {
           card.classList.remove("hidden");
       } else {

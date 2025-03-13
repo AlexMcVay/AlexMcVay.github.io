@@ -43,6 +43,25 @@ document.addEventListener("DOMContentLoaded", function () {
         console.warn("Cross-origin iframe detected. Resize observer not applied.");
       }
     });
+  }
+  /**
+  * Send an email to the portfolio owner with the given name, email, and message.
+  */
+
+
+  function sendEmail() {
+    var name = document.getElementById("name").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var message = document.getElementById("message").value.trim();
+
+    if (!name || !email || !message) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    var subject = "New message from " + name;
+    var mailtoLink = "mailto:alya.mcvay@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
+    window.location.href = mailtoLink;
   } // Attach event listeners to filter buttons
 
 
@@ -54,30 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 /**
-* Send an email to the portfolio owner with the given name, email, and message.
-*/
-
-function sendEmail() {
-  var name = document.getElementById("name").value.trim();
-  var email = document.getElementById("email").value.trim();
-  var message = document.getElementById("message").value.trim();
-
-  if (!name || !email || !message) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  var subject = "New message from " + name;
-  var mailtoLink = "mailto:alya.mcvay@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(message);
-  window.location.href = mailtoLink;
-}
-/**
 * Filters and displays cards based on the specified tag.
 *
 * @param {string} tag - The tag used to filter cards. If 'all', all cards are displayed.
 * @param {HTMLElement} button - The button element that was clicked.
 */
-
 
 function filterCards(tag, button) {
   console.log("filterCards called with tag:", tag);
@@ -91,7 +91,7 @@ function filterCards(tag, button) {
   button.classList.add("active"); // Filter cards
 
   cards.forEach(function (card) {
-    var cardTags = card.getAttribute("data-tags").split(" ");
+    var cardTags = card.getAttribute("data-tags").split(",");
 
     if (tag === "all" || cardTags.includes(tag)) {
       card.classList.remove("hidden");
