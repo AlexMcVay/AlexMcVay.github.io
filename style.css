@@ -19,30 +19,27 @@ body {
     color: var(--primary-color);
 }
 header {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     padding: 1rem 0;
     text-align: center;
 }
+nav{
+  width: 100%;
+}
 nav ul {
+    display: flex;
+    color: var(--background-color);
     list-style: none;
     padding: 0;
 }
 
-.tech-logos {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+section {
+    padding: 1rem;
+    text-align: left;
 }
-
-.tech-icon {
-  width: 30px; /* Adjust as needed */
-  height: 30px;
-}
-
 
 .chart-wrapper {
-  max-width: 1150px;
   padding: 0 10px;
   margin: 0 auto;
   overflow-x: auto;
@@ -100,6 +97,60 @@ nav ul {
   }
 }
 
+/* PROJECT CARDS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.filter-buttons {
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+.filter-buttons button {
+  margin: 5px;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  outline-color: var(--primary-color);
+}
+.filter-buttons button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+.cards {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping if necessary */
+  gap: 20px; /* Adds space between cards */
+  justify-content: center; /* Centers cards in the container */
+
+}
+.card {
+  width: 200px;
+  padding: 15px;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: block;
+  cursor: pointer;
+}
+.card-link {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  background-color: #3e8e41;
+}
+.hidden {
+  display: none;
+}
+
 
 /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -107,9 +158,5 @@ nav ul {
   font-size: 0.85rem;
   padding: 10px;
   text-align: right;
-  color: var(--black);
-}
-
-.page-footer span {
-  color: #e31b23;
+  color: var(--text-color);
 }
