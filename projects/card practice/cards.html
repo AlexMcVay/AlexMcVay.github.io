@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filterable Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .filter-buttons {
+            margin-bottom: 20px;
+        }
+        .filter-buttons button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+        .filter-buttons button.active {
+            background-color: #007BFF;
+            color: white;
+        }
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .card {
+            width: 200px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            display: block;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="filter-buttons">
+        <button onclick="filterCards('all')" class="active">All</button>
+        <button onclick="filterCards('tech')">Tech</button>
+        <button onclick="filterCards('business')">Business</button>
+        <button onclick="filterCards('art')">Art</button>
+    </div>
+
+    <div class="cards-container">
+        <div class="card" data-tags="tech business">Card 1 (Tech, Business)</div>
+        <div class="card" data-tags="business">Card 2 (Business)</div>
+        <div class="card" data-tags="tech">Card 3 (Tech)</div>
+        <div class="card" data-tags="art">Card 4 (Art)</div>
+        <div class="card" data-tags="tech art">Card 5 (Tech, Art)</div>
+    </div>
+
+    <script>
+        function filterCards(tag) {
+            let cards = document.querySelectorAll(".card");
+            let buttons = document.querySelectorAll(".filter-buttons button");
+
+            buttons.forEach(btn => btn.classList.remove("active"));
+            event.target.classList.add("active");
+
+            cards.forEach(card => {
+                let cardTags = card.getAttribute("data-tags").split(" ");
+                if (tag === "all" || cardTags.includes(tag)) {
+                    card.classList.remove("hidden");
+                } else {
+                    card.classList.add("hidden");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

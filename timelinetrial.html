@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline Trial</title>
@@ -11,27 +12,31 @@
 
             tasks.forEach(el => {
                 const duration = el.dataset.duration.split("-");
-                const startyear = duration[0];
-                const endyear = duration[1];
-                let left = 0,
-                    width = 0;
+                const startYear = parseInt(duration[0]);
+                const endYear = parseInt(duration[1]);
 
-                if (startyear.endsWith("½")) {
-                    const filteredArray = yearsArray.filter(year => year.textContent == startyear.slice(0, -1));
-                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
-                } else {
-                    const filteredArray = yearsArray.filter(year => year.textContent == startyear);
-                    left = filteredArray[0].offsetLeft;
+                let left = 0;
+                let width = 0;
+                
+                const yearElements = Array.from(years);
+
+                // Calculate left position based on start year
+                const startYearIndex = yearElements.findIndex(year => parseInt(year.textContent) === startYear);
+                if (startYearIndex !== -1) {
+                    left = yearElements[startYearIndex].offsetLeft;
                 }
 
-                if (endyear.endsWith("½")) {
-                    const filteredArray = yearsArray.filter(year => year.textContent == endyear.slice(0, -1));
-                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                // Calculate width based on end year
+                const endYearIndex = yearElements.findIndex(year => parseInt(year.textContent) === endYear);
+                if (endYearIndex !== -1) {
+                    width = yearElements[endYearIndex].offsetLeft + yearElements[endYearIndex].offsetWidth - left;
                 } else {
-                    const filteredArray = yearsArray.filter(year => year.textContent == endyear);
-                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                   // If end year not found, use the last year as end and calc
+                     width = yearElements[yearElements.length - 1].offsetLeft + yearElements[yearElements.length - 1].offsetWidth - left;
+                    
                 }
 
+              
                 // apply css
                 el.style.left = `${left}px`;
                 el.style.width = `${width}px`;
@@ -47,197 +52,217 @@
           
          
     </script>
-<style>
-      /* RESET RULES
-      –––––––––––––––––––––––––––––––––––––––––––––––––– */
-      @import url("style.css");
-      
-      * {
-          padding: 0;
-          margin: 0;
-          box-sizing: border-box;
-      }
+    <style>
+        /* RESET RULES
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+        @import url("style.css");
 
-      ul {
-          list-style: none;
-      }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-      a {
-          text-decoration: none;
-          color: inherit;
-      }
+        ul {
+            list-style: none;
+        }
 
-      body {
-          background: var(--body);
-          font-size: 16px;
-          font-family: sans-serif;
-          padding-top: 40px;
-          color: var(--text-color); /*use text color here*/
-      }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-      .chart-wrapper {
-          max-width: 1150px;
+        body {
+            background: var(--body);
+            font-size: 16px;
+            font-family: sans-serif;
+            padding-top: 40px;
+            color: var(--text-color); /*use text color here*/
+        }
+
+        .chart-wrapper {
+          width: 100%;
           padding: 0 10px;
           margin: 0 auto;
-      }
+        }
 
 
-      /* CHART-VALUES
-      –––––––––––––––––––––––––––––––––––––––––––––––––– */
-      .chart-wrapper .chart-values {
-          position: relative;
-          display: flex;
-          margin-bottom: 20px;
-          font-weight: bold;
-          font-size: 1.2rem;
-          color: var(--accent-color) /*use text color here*/
-      }
+        /* CHART-VALUES
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-values {
+            position: relative;
+            display: flex;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color) /*use text color here*/
+        }
 
-      .chart-wrapper .chart-values li {
-          flex: 1;
-          min-width: 80px;
-          text-align: center;
-          color: var(--primary-color);
-      }
+        .chart-wrapper .chart-values li {
+            flex: 1;
+            min-width: 80px;
+            text-align: center;
+            color: var(--primary-color);
+        }
 
-      .chart-wrapper .chart-values li:not(:last-child) {
-          position: relative;
-      }
+        .chart-wrapper .chart-values li:not(:last-child) {
+            position: relative;
+        }
 
-      .chart-wrapper .chart-values li:not(:last-child)::before {
-          content: '';
-          position: absolute;
-          right: 0;
-          height: 510px;
-          border-right: 1px solid var(--divider);
-      }
+        .chart-wrapper .chart-values li:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            height: 510px;
+            border-right: 1px solid var(--divider);
+        }
 
 
-      /* CHART-BARS
-      –––––––––––––––––––––––––––––––––––––––––––––––––– */
-      .chart-wrapper .chart-bars li {
-          position: relative;
-          color: var(--body);
-          margin-bottom: 15px;
-          font-size: 16px;
-          border-radius: 20px;
-          padding: 10px 20px;
-          width: 0;
-          opacity: 0;
-          height: 50px;/* original height */
-          cursor: pointer;/*indicate clickable*/
-          overflow: hidden; /* hide overflow*/
-          background-color: var(--primary-color); /* default background color */
-          color: white; /*use text color here*/
-          transition: none;
-      }
+        /* CHART-BARS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– */
+        .chart-wrapper .chart-bars li {
+            position: relative;
+            color: var(--body);
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 0;
+            opacity: 0;
+            height: 50px;/* original height */
+            cursor: pointer;/*indicate clickable*/
+            overflow: hidden; /* hide overflow*/
+            background-color: var(--primary-color); /* default background color */
+            color: white; /*use text color here*/
+            transition: all 0.3s ease; /* Add transition for all properties */
+            z-index: 1;
+        }
 
-       .chart-wrapper .chart-bars li:hover {   
-          height: auto;
-           transition: height 0.3s ease;
-           overflow: visible;
-      }
+        .chart-wrapper .chart-bars li:hover {   
+            height: auto;
+            width: 100% !important; /* Set width to 100% on hover */
+            left: 0 !important; /* Align to the left when expanded */
+            z-index: 2; /* Ensure it's above other elements */
+            transition: all 0.3s ease;
+        }
 
-       .chart-wrapper .chart-bars li:hover ul.description li{
-        display: list-item;
-        opacity: 1;
-       }
+        .chart-wrapper .chart-bars li:hover ul.description li{
+            display: list-item;
+            opacity: 1;
+            color: var(--text-color);
+        }
 
-       .description li{
-          list-style-type: disc;
-          margin-left: 40px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          overflow: visible !important;
-       }
+        .description li{
+            list-style-type: disc;
+            margin-left: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow: visible !important;
+            color: (var(--primary-color));
+        }
 
-      @media screen and (max-width: 600px) {
-          .chart-wrapper .chart-bars li {
-              padding: 10px;
-          }
-      }
-    
-</style></head>
+        @media screen and (max-width: 600px) {
+            .chart-wrapper .chart-bars li {
+                padding: 10px;
+            }
+        }
 
-    <body>
-        <div class="chart-wrapper">
-            <ul class="chart-values">
-                <li>2016</li>
-                <li>2017</li>
-                <li>2018</li>
-                <li>2019</li>
-                <li>2020</li>
-                <li>2021</li>
-                <li>2022</li>
-                <li>2023</li>
-                <li>2024</li>
-                <li>2025</li>
-            </ul>
-            <ul class="chart-bars">
-                <li data-duration="2023-2025"  style="left: 0px; width: 986px; opacity: 1;">
-        <h3 class="job">Naval Surface Warfare Center (NSWC) VTEC Intern (May 2023 - Present) Philadelphia, Pennsylvania, United States</h3>
-            <p class="description">Facilitated and conducted a highly engaging and educational humanitarian warfare games promoting awareness and understanding of complex global issues related to conflict, humanitarian aid, critical thinking, and peacekeeping efforts.</p>
-            <p class="description">Conducted extensive playtesting and user feedback analysis to iterate and improve game mechanics.</p>
-            <p class="description">Optimized code and assets to ensure smooth performance on various gaming platforms.</p>
-            <p class="description">Conducted thorough research on historical battles, military strategies, and contemporary warfare tactics to inform game design.</p>
-            <p class="description">Received accolades for creating innovative and cutting-edge war game experiences that were praised for their realism and effectiveness in training exercises.</p>
-            <p class="description">Collaborated with military experts and personnel to incorporate realistic simulation elements into war games for maximum educational value.</p>
-            <p class="description">asdsadsa</p>
-    </li>
-    <li data-duration="2023"  style="left: 493px; width: 493px; opacity: 1;">
-        <h3 class="job">Know it All Tutors Private Tutor (March 2023 - October 2023)</h3>
+    </style>
+</head>
+
+<body>
+    <div class="chart-wrapper">
+        <ul class="chart-values">
+            <li>2016</li>
+            <li>2017</li>
+            <li>2018</li>
+            <li>2019</li>
+            <li>2020</li>
+            <li>2021</li>
+            <li>2022</li>
+            <li>2023</li>
+            <li>2024</li>
+            <li>2025</li>
+        </ul>
+        <ul class="chart-bars">
+            <li data-duration="2021-2025"  style="left: 0px; width: 493px; opacity: 1;"><h3 class="job">Bachelor of Science in Information Systems and Computer Science, Villanova University</h3>
+              <br>
+              <p class="description">Expected Graduation: 2025</p>
+              <p class="description">Relevant coursework: Cybersecurity, Software Development, Data Structures, Cloud Computing, and Database Management</p>
+              <p class="description">Proficient in Python, Java, and SQL, with hands-on experience in software development and system analysis</p>
+              <p class="description">Conducting research and implementing network security protocols to safeguard digital infrastructure</p>
+              <p class="description">Developing and optimizing cloud-based applications with AWS and Google Cloud technologies</p>
+              <p class="description">Collaborating on real-world projects, including database-driven applications and algorithmic problem-solving</p>
+              <p class="description">Active member of tech-focused student organizations, participating in hackathons and coding competitions</p>
+            </li>
+              <li data-duration="2023-2025"  style="left: 0px; width: 986px; opacity: 1;"><h3 class="job">Naval Surface Warfare Center - Intern</h3>
+              <br>
+              <p class="description">Facilitated and conducted a highly engaging and educational humanitarian warfare games promoting awareness and understanding of complex global issues related to conflict, humanitarian aid, critical thinking, and peacekeeping efforts.</p>
+              <p class="description">Conducted extensive playtesting and user feedback analysis to iterate and improve game mechanics.</p>
+              <p class="description">Optimized code and assets to ensure smooth performance on various gaming platforms.</p>
+              <p class="description">Conducted thorough research on historical battles, military strategies, and contemporary warfare tactics to inform game design.</p>
+              <p class="description">Received accolades for creating innovative and cutting-edge war game experiences that were praised for their realism and effectiveness in training exercises.</p>
+              <p class="description">Collaborated with military experts and personnel to incorporate realistic simulation elements into war games for maximum educational value.</p>
+              <p class="description">Conducted comprehensive testing and quality assurance to ensure the games met industry standards and user expectations.</p>
+            </li>
+            <li data-duration="2022-2023"  style="left: 493px; width: 493px; opacity: 1;"><h3 class="job">Know it All Tutors - Private Tutor </h3>
+              <br>
+              <p class="description">Implemented engaging teaching methods and instructional strategies to enhance students' comprehension and retention of course material.</p>
+              <p class="description">Monitored and tracked students' progress through regular assessments and feedback to identify areas for improvement and provide additional support.</p>
+              <p class="description">Demonstrated a proven track record of helping students achieve academic success and improve their confidence in the subject matter.</p>
+              <p class="description">Facilitated one-on-one tutoring sessions for students in computer science courses, focusing on topics such as programming languages, algorithms, and data structures.</p>
+              <p class="description">Assisted students in completing homework assignments, projects, and coding exercises, providing guidance and feedback to enhance their problem-solving skills.</p>
+              <p class="description">Conducted code reviews and debugging sessions to help students identify and correct errors in their programs, promoting a deeper understanding of programming concepts.</p>
+            </li>
+            <li data-duration="2020-2021"  style="left: 493px; width: 246.5px; opacity: 1;"> <h3 class="job">City of Fort Walton Beach -  Assistant </h3>
+                <br>
+                <p class="description">Created a Warehouse inventory system using SQL, VBA, and Advanced Microsoft Macros to determine the usability of inventory, determine needs for new inventory, and purge inventory.</p>
+                <p class="description">Performed routine calculations to produce analyses and reports as needed.</p>
+                <p class="description">Collected and entered data for various financial spreadsheets using various coding languages.</p>
+                <p class="description">Attended and presented at various finance department and company-wide meetings, thus assisting with financial reporting to managers and senior executives.</p>
+                <p class="description">Suggested changes or improvements to increase accuracy, efficiency, and cost reductions.</p>
+                <p class="description">Worked closely with relevant departments to ensure products purchased are in the taxpayers' best interest.</p>
+                <p class="description">Maintained current awareness of industry market trends. Conducted competitor analysis to identify popular products.</p>
+                <p class="description">Kept accurate records of purchases made using various programming languages.</p>
+                <p class="description">Engaged in ad hoc projects to support financial analysis and decision-making processes.</p>
+            
+            </li>
+            <li data-duration="2017-2021" style="left: 0px; width: 493px; opacity: 1;"><h3 class="job">Associate of Applied Science in Aerospace, Community College of the Air Force</h3>
+              <br>
+              <p class="description">Gained expertise in aircraft maintenance, troubleshooting, and repair techniques in high-pressure environments</p>
+              <p class="description">Conducted inspections and diagnostics to ensure compliance with FAA and military safety regulations</p>
+              <p class="description">Applied technical knowledge to maintain and repair complex aerospace systems and components</p>
+              <p class="description">Worked collaboratively with cross-functional teams to enhance operational efficiency and aircraft readiness</p>
+              <p class="description">Developed problem-solving and critical-thinking skills through real-world maintenance challenges</p>
+            </li>
+            <li data-duration="2016-2021" style="left: 0px; width: 493px; opacity: 1;"><h3 class="job">United States Air Force - PEB System & Egress Technician</h3>
+              <br>
+              <p class="description">Developed and implemented an innovative inventory system, now utilized internationally, which improved inventory tracking accuracy by 30%.</p>
+              <p class="description">Spearheaded the creation of a new inventory protocol that reduced system errors by 25%, significantly enhancing operational efficiency.</p>
+              <p class="description">Analyzed and forecasted inventory requirements for the egress mechanic shop to ensure optimal stock levels while reducing excess expenditures.</p>
+              <p class="description">Designed and executed training programs for the new PEB System, fostering a knowledgeable and skilled team.</p>
+              <p class="description">Supported and trained subordinates in inventory management programs, promoting a culture of continuous learning and improvement.</p>
+              <p class="description">Oversaw the tracking of all incoming and expended PEB items, utilizing SQL queries to extract data and generate insightful reports for decision-making.</p>
+              <p class="description">Developed SQL queries to enhance inventory data analysis, aligning with healthcare data management standards.</p>
+              <p class="description">Conducted comprehensive data audits to ensure compliance across all inventory processes.</p>
+              <p class="description">Collaborated in the update and design of F-35 ejection systems, enhancing the safety and reliability of critical military equipment.</p>
+              <p class="description">Served as an explosive and electric mechanic for various aircraft, including F-35, F-16, F-15, and F-22, ensuring operational readiness and performance.</p>
+              <p class="description">Supported mission-critical operations and adeptly managed funds for airmen during travel, demonstrating strong financial stewardship and team coordination.</p>
+              <p class="description">Developed and led a team of 5 airmen in safety program initiatives, achieving a 20% improvement in efficiency by redesigning hazardous waste protocols.</p>
+              <p class="description">Spearheaded a safety program overhaul that resulted in a 15% reduction in incidents and earned a commendation for excellence in maintaining high safety standards.</p>
+              <p class="description">Demonstrated proficiency in Microsoft Office Suite and leveraged SQL for data management and queries, contributing to effective communication and team collaboration.</p>
+              <p class="description">Egress Technician (December 2016 - December 2020)</p>
+              <p class="description">Assisted in the update and design of F-35 ejection systems.</p>
+              <p class="description">Served as an explosive and electric mechanic for various aircraft including: F-35, F-16, F-15, and F-22.</p>
+              <p class="description">Traveled for missions and managed funds for airmen while traveling.</p>
+              <p class="description">Managed Safety programs and Hazardous waste.</p>
+              <p class="description">Proficiency in Microsoft Office Suite.</p>
         
-            <p class="description">Implemented engaging teaching methods and instructional strategies to enhance students' comprehension and retention of course material.</p>
-            <p class="description">Monitored and tracked students' progress through regular assessments and feedback to identify areas for improvement and provide additional support.</p>
-            <p class="description">Demonstrated a proven track record of helping students achieve academic success and improve their confidence in the subject matter.</p>
-            <p class="description">Facilitated one-on-one tutoring sessions for students in computer science courses, focusing on topics such as programming languages, algorithms, and data structures.</p>
-            <p class="description">Assisted students in completing homework assignments, projects, and coding exercises, providing guidance and feedback to enhance their problem-solving skills.</p>
-            <p class="description">Conducted code reviews and debugging sessions to help students identify and correct errors in their programs, promoting a deeper understanding of programming concepts.</p>
-    </li>
-    <li data-duration="2020-2021"  style="left: 0px; width: 493px; opacity: 1;"> 
-        <h3 class="job">City of Fort Walton Beach Temporary Financial Assistant (August 2020 - December 2020)</h3>
-        
-            <p class="description">Created a Warehouse inventory system using SQL, VBA, and Advanced Microsoft Macros to determine the usability of inventory, determine needs for new inventory, and purge inventory.</p>
-            <p class="description">Performed routine calculations to produce analyses and reports as needed.</p>
-            <p class="description">Collected and entered data for various financial spreadsheets using various coding languages.</p>
-            <p class="description">Attended and presented at various finance department and company-wide meetings, thus assisting with financial reporting to managers and senior executives.</p>
-            <p class="description">Suggested changes or improvements to increase accuracy, efficiency, and cost reductions.</p>
-            <p class="description">Worked closely with relevant departments to ensure products purchased are in the taxpayers' best interest.</p>
-            <p class="description">Maintained current awareness of industry market trends. Conducted competitor analysis to identify popular products.</p>
-            <p class="description">Kept accurate records of purchases made using various programming languages.</p>
-            <p class="description">Engaged in ad hoc projects to support financial analysis and decision-making processes.</p>
-        
-    </li>
-    <li data-duration="2016-2020" style="left: 0px; width: 986px; opacity: 1;">
-        <h3 class="job">United States Air Force</h3>
-        
-            <p class="description">Developed and implemented an innovative inventory system, now utilized internationally, which improved inventory tracking accuracy by 30%.</p>
-            <p class="description">Spearheaded the creation of a new inventory protocol that reduced system errors by 25%, significantly enhancing operational efficiency.</p>
-            <p class="description">Analyzed and forecasted inventory requirements for the egress mechanic shop to ensure optimal stock levels while reducing excess expenditures.</p>
-            <p class="description">Designed and executed training programs for the new PEB System, fostering a knowledgeable and skilled team.</p>
-            <p class="description">Supported and trained subordinates in inventory management programs, promoting a culture of continuous learning and improvement.</p>
-            <p class="description">Oversaw the tracking of all incoming and expended PEB items, utilizing SQL queries to extract data and generate insightful reports for decision-making.</p>
-            <p class="description">Developed SQL queries to enhance inventory data analysis, aligning with healthcare data management standards.</p>
-            <p class="description">Conducted comprehensive data audits to ensure compliance across all inventory processes.</p>
-            <p class="description">Collaborated in the update and design of F-35 ejection systems, enhancing the safety and reliability of critical military equipment.</p>
-            <p class="description">Served as an explosive and electric mechanic for various aircraft, including F-35, F-16, F-15, and F-22, ensuring operational readiness and performance.</p>
-            <p class="description">Supported mission-critical operations and adeptly managed funds for airmen during travel, demonstrating strong financial stewardship and team coordination.</p>
-            <p class="description">Developed and led a team of 5 airmen in safety program initiatives, achieving a 20% improvement in efficiency by redesigning hazardous waste protocols.</p>
-            <p class="description">Spearheaded a safety program overhaul that resulted in a 15% reduction in incidents and earned a commendation for excellence in maintaining high safety standards.</p>
-            <p class="description">Demonstrated proficiency in Microsoft Office Suite and leveraged SQL for data management and queries, contributing to effective communication and team collaboration.</p>
-            <p class="description">Egress Technician (December 2016 - December 2020)</p>
-            <p class="description">Assisted in the update and design of F-35 ejection systems.</p>
-            <p class="description">Served as an explosive and electric mechanic for various aircraft including: F-35, F-16, F-15, and F-22.</p>
-            <p class="description">Traveled for missions and managed funds for airmen while traveling.</p>
-            <p class="description">Managed Safety programs and Hazardous waste.</p>
-            <p class="description">Proficiency in Microsoft Office Suite.</p>
-        
-    </li>
-            </ul>
-        </div>
+            </li>
+        </ul>
+    </div>
     
     
     
-    </body>
-    </html>
-    
+</body>
+</html>
