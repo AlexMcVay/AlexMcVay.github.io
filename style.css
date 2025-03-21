@@ -24,14 +24,50 @@ header {
     padding: 1rem 0;
     text-align: center;
 }
-nav{
-  width: 100%;
-}
-nav ul {
+
+/* Navigation Styles */
+
+nav {
+    width: 100%;
     display: flex;
-    color: var(--background-color);
+    justify-content: center; 
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
     list-style: none;
     padding: 0;
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for horizontal alignment */
+}
+
+nav li {
+    margin: 0 1rem; /* Add spacing between items */
+}
+
+nav a {
+    text-decoration: none; /* Remove underlines from links */
+    color: var(--secondary-text-color); /* Use variable for consistency */
+    padding: 0.5rem 1rem; /* Add padding for better click area */
+    border-radius: 5px; /* Add rounded corners */
+    transition: background-color 0.3s ease; /* Add smooth transition for hover effect */
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Add subtle hover effect */
+}
+
+
+/* Responsive Design (for smaller screens) */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items vertically */
+    }
+    nav li {
+        margin: 0.5rem 0; /* Adjust spacing for vertical layout */
+    }
 }
 
 section {
@@ -152,6 +188,43 @@ section {
 }
 
 
+/* contact form */
+/* ... your existing CSS ... */
+
+.contact-icons {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Arrange icons horizontally */
+  gap: 1rem; /* Add space between icons */
+}
+
+.contact-icons li {
+  margin: 0; /* Remove default list item margin */
+}
+
+.contact-icons a {
+  text-decoration: none;
+  color: var(--link-color); /* Use your link color variable */
+  display: flex; /* Center the icon */
+  align-items: center; /* Vertically center the icon */
+  transition: color 0.3s ease; /* Smooth transition for hover */
+}
+
+.contact-icons a:hover {
+  color: var(--link-hover-color); /* Use your link hover color variable */
+}
+
+.contact-icons i { /* Style the Font Awesome icons */
+  font-size: 1.5rem; /* Adjust icon size as needed */
+  margin-right: 0.5rem; /* Add space between icon and text (if you want text labels) */
+}
+
+/* Optional: Add a hover effect to the icons */
+.contact-icons i:hover {
+transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+
 /* FOOTER
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .page-footer {
@@ -160,3 +233,13 @@ section {
   text-align: right;
   color: var(--text-color);
 }
+
+
+
+.container span::after{
+  content: '|';
+  animation-name: blinking; 
+  animation-duration: .71s; 
+  animation-iteration-count: infinite;
+}
+

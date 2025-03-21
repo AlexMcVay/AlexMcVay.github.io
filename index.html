@@ -4,22 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex McVay's Portfolio</title>
+    <script>
+      // Test Case 1.1: Verify that the header displays the correct title ("Alex McVay's Portfolio").
+      let title = document.querySelector("title");
+      if (title.textContent !== "Alex McVay's Portfolio") {
+        console.error("Test Case 1.1 Failed: Title does not match expected value.");
+      } else {
+        console.log("Test Case 1.1 Passed: Title matches expected value.");
+      }
+    </script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <header>
         <h1>Hello! I'm Alex McVay 👋</h1>
-        <h2> I am a Front-End Developer</h2><!-- TODO: add typeing effect -->
+        <!-- TODO: add typeing effect 
+        <div class="container">
+          <div class="typing-container">
+              <h2>I am a&nbsp;
+                <span typing-speed="70" typing-delay="1000" 
+                words="Front-End Developer, Full-Stack Developer, Web Developer, SQL Developer, Database Administrator, UI/UX Designer, Passionate Learner, Military Veteran, very determined person,Puzzle Solver" 
+                class="typing"></span> 
+              </h2>
+          </div>-->
+      </div>
         <!-- <button id="theme-toggle" onclick="toggleTheme()">Toggle Theme</button> TODO: add dark mode -->
-        <a href="resume.pdf" target="_blank"><button>Download my Resume</button> </a>
+      <div id="navbar">
         <nav>
             <ul>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#timeline">Timeline</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a id="projects-link" href="#projects">Projects</a></li>
+                <li><a id="timeline-link" href="#timeline">Timeline</a></li>
+                <li><a id="contact-link" href="#contact">Contact</a></li>
+                <li><a id="resume-link" href="resume.pdf" target="_blank">Resume</a></li>
             </ul>
         </nav>
+        <script>
+          // Test Case 1.2: Verify that the navigation links (#projects, #timeline, #contact) work correctly and navigate to the appropriate sections.
+          let links = document.querySelectorAll("nav a");
+          links.forEach(link => {
+            link.addEventListener("click", (event) => {
+              event.preventDefault();
+              let targetSection = document.querySelector(link.getAttribute("href"));
+              if (targetSection) {
+                window.scrollTo({
+                  top: targetSection.offsetTop,
+                  behavior: "smooth"
+                });
+              } else {
+                console.error("Test Case 1.2 Failed: Link does not navigate to the correct section.");
+              }
+            });
+          });
+        </script>
+      </div>
     </header>
       
     <section id="Projects">
@@ -57,9 +97,9 @@
               class="card"
               data-tags="design,css3,html5,javascript,scripting,frontend,web,ui/ux,markdown,mobile "
             >
-              <a href="https://alexmcvay.github.io/Portfolio/">
+              <a onclick="this.style.description.innerHTML = 'Very funny, but you are already here!'">
                 <h3>Portfolio</h3>
-                <p>This portfolio website.</p>
+                <p class="description">You're looking at it.</p>
               </a>
             </div>
             <div
@@ -68,7 +108,7 @@
             >
               <a href="https://studentcalendar.netlify.app/">
                 <h3>Student Calendar</h3>
-                <p>A student calendar app.</p>
+                <p>A student calendar and Todo list tool.</p>
               </a>
             </div>
             <div
@@ -76,8 +116,8 @@
               data-tags="ui/ux,design,css3,html5,javascript,frontend,web,mobile"
             >
               <a href="https://alexmcvay.github.io/Contact-Card/">
-                <h3>LinkTree Clone</h3>
-                <p>A linktree clone with a Download button for contact info.</p>
+                <h3>My Contact Card</h3>
+                <p>A contact card site witha download button.</p>
               </a>
             </div>
             <div class="card" data-tags="database,sql,mermaid ">
@@ -86,54 +126,74 @@
                 <p>A data analysis clone of UBER</p>
               </a>
             </div>
-            <div
-              class="card"
-              data-tags="ui/ux,design,css3,html5,javascript,frontend,web,mobile "
-            >
+            <div class="card" data-tags="ui/ux,design,css3,html5,javascript,frontend,web,mobile ">
               <a href="https://alexandra-mcvay.netlify.app/">
                 <h3>Tic Tac Toe</h3>
                 <p>A game of Tic Tac Toe</p>
               </a>
             </div>
+            <div class="card" data-tags="database,sql,API,UI/UX,design,css3,html5,javascript,frontend,web">
+              <a href="https://alexmcvay.github.io/Forgien-GI-schools.github.io/">
+                <h3>Overseas VA Schools</h3>
+                <p>A tool for vetrans to find overseas schools.</p>
+              </a>
+            </div>
+            <div class="card" >
+              <a href="https://alexmcvay.github.io/spelling/">
+                <h3>Cryptography Game</h3>
+                <p>A Cryptography Game with some of my favorite quotes</p>
+              </a>
+
+            </div>
+            <div class="card" >
+              <a>
+                <h3>And More To Come</h3>
+              </a>
+            </div>
+
+
           </div>
           
-        
-
+         
+          <script>
+            // Test Case 1.3: Verify that all filter buttons function correctly. (Test each button individually, ensuring only the correct cards are shown).
+            let filterButtons = document.querySelectorAll(".filter-buttons button");
+            filterButtons.forEach(button => {
+              button.addEventListener("click", (event) => {
+                let targetTag = event.target.getAttribute("data-tag");
+                let cards = document.querySelectorAll(".card");
+                cards.forEach(card => {
+                  if (card.getAttribute("data-tags").includes(targetTag)) {
+                    card.classList.remove("hidden");
+                  } else {
+                    card.classList.add("hidden");
+                  }
+                });
+              });
+            });
+          </script>
 
             
         </div>
     </section>
     <section id="timeline">
         <h2>Timeline</h2>
-        <iframe src="timelinetrial.html" width="100%" height="600px" frameborder="0" title="Career Timeline"></iframe>
+        
+        <iframe src="timelinetrial.html" width="100%" height=900px frameborder="0" title="Career Timeline"></iframe>
     </section>
 
-    
-    <section id="contact">
-        <h2> Get in Touch</h2>
-        
-        <form>
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message:</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit">Send Message</button>
-          </form>
-          
-    </section>
-    
     <footer>
-        <p><a href="mailto:alya.mcvay@gmail.com" target="blank">Email</a> | <a href="https://www.linkedin.com/in/alexandra-mcvay/" target="blank">LinkedIn</a> |  <a href:="https://github.com/AlexMcVay" target="blank">GitHub</a></p>
-        <p>&copy; 2025 Alex McVay. All rights reserved.Hosted by GitHub</p>
-        <p><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+      <section id="contact">
+        <h2>Contact Me</h2>
+        <p>You can reach me at:</p>
+        <ul class="contact-icons">
+            <li><a href="mailto:alya.mcvay@gmail.com"><i class="fas fa-envelope"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/alexandra-mcvay/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://github.com/AlexMcVay" target="_blank"><i class="fab fa-github"></i></a></li>
+        </ul>
+    </section>
+        <p align="right">&copy; 2025 Alex McVay. All rights reserved.Hosted by GitHub
+        <small align="right"><a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></small></p>
     </footer>
 </body>
 </html>
