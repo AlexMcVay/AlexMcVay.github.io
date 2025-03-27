@@ -1,104 +1,63 @@
-/**
- * Resize an iframe to fit its contents.
- *
- * The iframe is resized to the height of its content. This function should be
- * called whenever the iframe's content changes.
- *
- * @param {HTMLIFrameElement} iframe The iframe to be resized.
- */
-function resizeIframe(iframe) {
-  iframe.style.height = "auto"; // Reset height to allow shrinking
-  const newHeight = iframe.contentWindow.document.body.scrollHeight;
-  iframe.style.height = newHeight + "px"; // Set new height
-}
-
-// Wait for the DOM to fully load
-document.addEventListener("DOMContentLoaded", function () {
-  const iframe = document.getElementById("timelineIframe");
-
-  if (iframe) {
-      iframe.addEventListener("load", () => {
-          try {
-              resizeIframe(iframe);
-
-              // Set up MutationObserver inside the iframe
-              const observer = new MutationObserver(() => resizeIframe(iframe));
-
-              observer.observe(iframe.contentWindow.document.body, {
-                  childList: true, // Observe direct children
-                  subtree: true, // Observe all descendants
-                  attributes: true, // Observe attribute changes
-              });
-
-              // Resize on window resize (for good measure)
-              window.addEventListener("resize", () => resizeIframe(iframe));
-          } catch (error) {
-              console.warn("Cross-origin iframe detected. Resize observer not applied.");
-          }
-      });
-  }
+//CARDS
 
 
+const filterButtons = document.querySelectorAll(".filter-buttons button");
+const cards = document.querySelectorAll(".card");
 
-/**
-* Send an email to the portfolio owner with the given name, email, and message.
-*/
-function sendEmail() {
-  var name = document.getElementById("name").value.trim();
-  var email = document.getElementById("email").value.trim();
-  var message = document.getElementById("message").value.trim();
-
-  if (!name || !email || !message) {
-      alert("Please fill in all fields.");
-      return;
-  }
-
-  var subject = "New message from " + name;
-  var mailtoLink =
-      "mailto:alya.mcvay@gmail.com?subject=" +
-      encodeURIComponent(subject) +
-      "&body=" +
-      encodeURIComponent(message);
-
-  window.location.href = mailtoLink;
-}
-
-
-  // Attach event listeners to filter buttons
-  const filterButtons = document.querySelectorAll(".filter-buttons button");
-  filterButtons.forEach(button => {
-      button.addEventListener("click", function () {
-          filterCards(this.getAttribute("data-tag"), this);
-      });
+filterButtons.forEach(button => {
+  button.addEventListener("click", e => {
+    filterCards(e.currentTarget);
   });
 });
 
-
-/**
-* Filters and displays cards based on the specified tag.
-*
-* @param {string} tag - The tag used to filter cards. If 'all', all cards are displayed.
-* @param {HTMLElement} button - The button element that was clicked.
-*/
-function filterCards(tag, button) {
+function filterCards(button) {
+  const tag = button.dataset.tag;
   console.log("filterCards called with tag:", tag);
-  let cards = document.querySelectorAll(".card");
-  let buttons = document.querySelectorAll(".filter-buttons button");
 
-  // Remove "active" class from all buttons
-  buttons.forEach(btn => btn.classList.remove("active"));
-
-  // Add "active" class to the clicked button
-  button.classList.add("active");
+  filterButtons.forEach(btn => btn.classList.toggle("active", btn === button));
 
   // Filter cards
   cards.forEach(card => {
-      let cardTags = card.getAttribute("data-tags").split(",");
-      if (tag === "all" || cardTags.includes(tag)) {
-          card.classList.remove("hidden");
-      } else {
-          card.classList.add("hidden");
-      }
+    let cardTags = card.dataset.tags.split(" ");
+      
+    card.classList.toggle("hidden", tag !== "all" && !cardTags.includes(tag));
   });
 }
 
+
+//CONTACT FORM
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent default form submission
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  // Create a data object
+  const data = { name, email, message };
+
+  // Send the data to your server-side script using fetch or similar
+  fetch('/send-email', { // Replace '/send-email' with your server endpoint
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Handle the response from the server
+    if (data.success) {
+      alert('Email sent successfully!');
+      // Optionally reset the form
+      document.getElementById('contact-form').reset();
+    } else {
+      alert('Error sending email: ' + data.message);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An unexpected error occurred. Please try again later.');
+  });
+});
