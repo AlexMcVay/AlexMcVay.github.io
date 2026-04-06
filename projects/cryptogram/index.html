@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cryptogram</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f0e8;
+      color: #1a1a1a;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #3a2a1a;
+    }
+
+    #attribution {
+      font-size: 0.85rem;
+      color: #7a6a5a;
+      margin-bottom: 28px;
+      font-style: italic;
+      min-height: 1.2em;
+    }
+
+    #quote-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 24px;
+      justify-content: center;
+      max-width: 820px;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    .word {
+      display: flex;
+      gap: 4px;
+    }
+
+    .cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 34px;
+      cursor: pointer;
+    }
+
+    .guess-box {
+      width: 34px;
+      height: 36px;
+      border: none;
+      border-bottom: 2px solid #8a7a6a;
+      background: transparent;
+      text-align: center;
+      font-size: 1.3rem;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      outline: none;
+      cursor: pointer;
+      caret-color: transparent;
+      letter-spacing: 0;
+    }
+
+    .guess-box:focus {
+      border-bottom: 2.5px solid #5a3a1a;
+      background: #ede8de;
+    }
+
+    .guess-box.correct {
+      color: #2a6a2a;
+      border-bottom-color: #2a6a2a;
+    }
+
+    .guess-box.wrong {
+      color: #8a2a2a;
+    }
+
+    .cipher-num {
+      font-size: 0.62rem;
+      color: #9a8a7a;
+      margin-top: 2px;
+      letter-spacing: 0;
+      user-select: none;
+    }
+
+    .punctuation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: auto;
+      padding-bottom: 18px;
+      font-size: 1.3rem;
+      color: #3a2a1a;
+      user-select: none;
+    }
+
+    #status {
+      font-size: 1rem;
+      color: #3a2a1a;
+      margin-bottom: 20px;
+      min-height: 1.4em;
+      text-align: center;
+    }
+
+    #win-msg {
+      display: none;
+      font-size: 1.4rem;
+      color: #2a6a2a;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadein 0.6s ease;
+    }
+
+    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+    button#next-btn {
+      display: none;
+      padding: 10px 28px;
+      background: #3a2a1a;
+      color: #f5f0e8;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: background 0.2s;
+    }
+
+    button#next-btn:hover { background: #5a4a2a; }
+
+    #progress {
+      font-size: 0.8rem;
+      color: #9a8a7a;
+      margin-top: 16px;
+    }
+
+    a.back-link {
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      font-size: 0.8rem;
+      color: #7a6a5a;
+      text-decoration: none;
+      font-family: 'Georgia', serif;
+    }
+
+    a.back-link:hover { color: #3a2a1a; }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="../../index.html">← Portfolio</a>
+  <h1>Cryptogram</h1>
+  <div id="attribution"></div>
+  <div id="win-msg">You solved it! 🎉</div>
+  <div id="quote-area"></div>
+  <div id="status"></div>
+  <button id="next-btn" onclick="nextQuote()">Next Quote →</button>
+  <div id="progress"></div>
+
+  <script>
+    const QUOTES = [
+      { text: "Be the change you wish to see in the world", author: "Mahatma Gandhi" },
+      { text: "The only way to do great work is to love what you do", author: "Steve Jobs" },
+      { text: "In the middle of every difficulty lies opportunity", author: "Albert Einstein" },
+      { text: "It does not matter how slowly you go as long as you do not stop", author: "Confucius" },
+      { text: "Life is what happens when you are busy making other plans", author: "John Lennon" },
+      { text: "The future belongs to those who believe in the beauty of their dreams", author: "Eleanor Roosevelt" },
+      { text: "It always seems impossible until it is done", author: "Nelson Mandela" },
+      { text: "You miss one hundred percent of the shots you do not take", author: "Wayne Gretzky" },
+      { text: "Whether you think you can or think you cannot you are right", author: "Henry Ford" },
+      { text: "Two roads diverged in a wood and I took the one less traveled by", author: "Robert Frost" },
+      { text: "Ask not what your country can do for you ask what you can do for your country", author: "John F. Kennedy" },
+      { text: "That which does not kill us makes us stronger", author: "Friedrich Nietzsche" },
+      { text: "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment", author: "Ralph Waldo Emerson" },
+      { text: "Do or do not there is no try", author: "Yoda" },
+      { text: "With great power comes great responsibility", author: "Stan Lee" },
+      { text: "I have not failed I have just found ten thousand ways that will not work", author: "Thomas Edison" },
+      { text: "The greatest glory in living lies not in never falling but in rising every time we fall", author: "Nelson Mandela" },
+      { text: "Spread love everywhere you go let no one ever come to you without leaving happier", author: "Mother Teresa" },
+      { text: "When you reach the end of your rope tie a knot in it and hang on", author: "Franklin D. Roosevelt" },
+      { text: "Always remember that you are absolutely unique just like everyone else", author: "Margaret Mead" },
+    ];
+
+    const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    let quoteIndex = 0;
+    let cipher = {};       // plainLetter -> cipherLetter
+    let decipher = {};     // cipherLetter -> plainLetter
+    let guesses = {};      // cipherLetter -> guessedLetter
+    let solved = false;
+    let allCells = [];     // flat list of {input, cipherChar, plainChar}
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function buildCipher() {
+      const shuffled = shuffle([...ALPHA]);
+      cipher = {};
+      decipher = {};
+      for (let i = 0; i < 26; i++) {
+        // ensure no letter maps to itself
+        if (shuffled[i] === ALPHA[i]) {
+          const swapIdx = (i + 1) % 26;
+          [shuffled[i], shuffled[swapIdx]] = [shuffled[swapIdx], shuffled[i]];
+        }
+        cipher[ALPHA[i]] = shuffled[i];
+        decipher[shuffled[i]] = ALPHA[i];
+      }
+    }
+
+    function encode(plainChar) {
+      const u = plainChar.toUpperCase();
+      return ALPHA.includes(u) ? cipher[u] : u;
+    }
+
+    function cipherNum(cipherChar) {
+      return ALPHA.indexOf(cipherChar) + 1;
+    }
+
+    function loadQuote() {
+      solved = false;
+      guesses = {};
+      allCells = [];
+      document.getElementById('win-msg').style.display = 'none';
+      document.getElementById('next-btn').style.display = 'none';
+      document.getElementById('status').textContent = '';
+
+      const { text, author } = QUOTES[quoteIndex];
+      document.getElementById('attribution').textContent = '— ' + author;
+      document.getElementById('progress').textContent =
+        'Quote ' + (quoteIndex + 1) + ' of ' + QUOTES.length;
+
+      buildCipher();
+
+      const area = document.getElementById('quote-area');
+      area.innerHTML = '';
+
+      // Split preserving punctuation at end of words
+      const words = text.split(' ');
+      words.forEach(word => {
+        // Separate trailing punctuation
+        const match = word.match(/^([A-Za-z]*)([^A-Za-z]*)$/);
+        const letters = match ? match[1] : word;
+        const punct = match ? match[2] : '';
+
+        const wordDiv = document.createElement('div');
+        wordDiv.className = 'word';
+
+        letters.split('').forEach(ch => {
+          const plain = ch.toUpperCase();
+          const ciph = encode(plain);
+          const num = cipherNum(ciph);
+
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.maxLength = 1;
+          input.className = 'guess-box';
+          input.dataset.cipher = ciph;
+          input.dataset.plain = plain;
+          input.autocomplete = 'off';
+          input.autocorrect = 'off';
+          input.spellcheck = false;
+
+          // Fill in any existing correct guess for this cipher letter
+          if (guesses[ciph]) {
+            input.value = guesses[ciph];
+            if (guesses[ciph] === plain) input.classList.add('correct');
+          }
+
+          input.addEventListener('focus', () => selectCipher(ciph));
+          input.addEventListener('keydown', e => handleKey(e, input));
+          input.addEventListener('input', e => handleInput(e, input));
+
+          const numSpan = document.createElement('span');
+          numSpan.className = 'cipher-num';
+          numSpan.textContent = num;
+
+          cell.appendChild(input);
+          cell.appendChild(numSpan);
+          wordDiv.appendChild(cell);
+
+          allCells.push({ input, cipherChar: ciph, plainChar: plain });
+        });
+
+        if (punct) {
+          const p = document.createElement('div');
+          p.className = 'punctuation';
+          p.textContent = punct;
+          wordDiv.appendChild(p);
+        }
+
+        area.appendChild(wordDiv);
+      });
+    }
+
+    function selectCipher(ciph) {
+      // Highlight all cells with same cipher letter
+      allCells.forEach(c => {
+        c.input.classList.toggle('focused-group', c.cipherChar === ciph);
+      });
+    }
+
+    function handleKey(e, input) {
+      const ciph = input.dataset.cipher;
+      if (e.key === 'Backspace' || e.key === 'Delete') {
+        e.preventDefault();
+        if (guesses[ciph]) {
+          delete guesses[ciph];
+          updateAllWithCipher(ciph, '');
+        } else {
+          // Move backward
+          moveFocus(input, -1);
+        }
+        return;
+      }
+      if (e.key === 'ArrowRight') { e.preventDefault(); moveFocus(input, 1); return; }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); moveFocus(input, -1); return; }
+    }
+
+    function handleInput(e, input) {
+      const val = input.value.replace(/[^A-Za-z]/g, '').toUpperCase().slice(-1);
+      input.value = '';
+      if (!val) return;
+
+      const ciph = input.dataset.cipher;
+      guesses[ciph] = val;
+      updateAllWithCipher(ciph, val);
+      checkWin();
+
+      // Auto-advance to next blank
+      moveFocus(input, 1);
+    }
+
+    function updateAllWithCipher(ciph, val) {
+      allCells.forEach(c => {
+        if (c.cipherChar === ciph) {
+          c.input.value = val;
+          c.input.classList.remove('correct', 'wrong');
+          if (val) {
+            if (val === c.plainChar) c.input.classList.add('correct');
+            else c.input.classList.add('wrong');
+          }
+        }
+      });
+    }
+
+    function moveFocus(currentInput, dir) {
+      const idx = allCells.findIndex(c => c.input === currentInput);
+      let next = idx + dir;
+      while (next >= 0 && next < allCells.length) {
+        const nc = allCells[next];
+        // Skip already-correct cells when advancing forward
+        if (dir > 0 && !nc.input.classList.contains('correct')) { nc.input.focus(); return; }
+        if (dir < 0) { nc.input.focus(); return; }
+        next += dir;
+      }
+    }
+
+    function checkWin() {
+      const allCorrect = allCells.every(c => c.input.classList.contains('correct'));
+      if (allCorrect && !solved) {
+        solved = true;
+        document.getElementById('win-msg').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'inline-block';
+      }
+    }
+
+    function nextQuote() {
+      quoteIndex = (quoteIndex + 1) % QUOTES.length;
+      loadQuote();
+    }
+
+    // Randomize starting quote
+    quoteIndex = Math.floor(Math.random() * QUOTES.length);
+    loadQuote();
+  </script>
+</body>
+</html>
