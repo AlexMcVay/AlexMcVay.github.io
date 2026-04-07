@@ -69,7 +69,7 @@
               </a>
             </div>
             <div class="card" data-tags="design css3 html5 JavaScript scripting web UI/UX markdown mobile python">
-              <a href="https://alexmcvay.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">
+              <a href="#" onclick="portfolioGag(event)">
                 <h3>Portfolio</h3>
                 <p>This portfolio website.</p>
               </a>
@@ -88,14 +88,14 @@
             </div>
             <div class="card" data-tags="Database SQL mermaid python">
               <a href="https://github.com/AlexMcVay/UBER-Data" target="_blank" rel="noopener noreferrer">
-                <h3>UBER-Data</h3> 
-                <p> A data analysis clone of UBER</p>
+                <h3>UBER-Data</h3>
+                <p>SQL schema design and data modeling for an UBER-style database.</p>
               </a>
             </div>
             <div class="card" data-tags="UI/UX design css3 html5 javascript web mobile python">
-              <a href="https://alexandra-mcvay.netlify.app/" target="_blank" rel="noopener noreferrer">
+              <a href="https://alexmcvay.github.io/projects/tictactoe/" target="_blank" rel="noopener noreferrer">
                 <h3>Tic Tac Toe</h3>
-                <p>A game of Tic Tac Toe</p>
+                <p>A game of Tic Tac Toe — play vs AI or a friend.</p>
               </a>
             </div>
             <div class="card" data-tags="UI/UX design css3 html5 javascript frontend web SQL Database API c Dart python kaggle">
@@ -111,9 +111,9 @@
                 </a>
               </div>
             <div class="card" data-tags="UI/UX design css3 html5 javascript frontend web SQL Database API c Dart python">
-              <a href="https://alexmcvay.github.io/spelling/" target="_blank" rel="noopener noreferrer">
+              <a href="https://alexmcvay.github.io/projects/cryptogram/" target="_blank" rel="noopener noreferrer">
                 <h3>Cryptogram</h3>
-                <p>A  endlessgame of Cryptogram with my favorite quotes</p>
+                <p>An endless cryptogram game with famous quotes.</p>
               </a>
             </div>
           </div>
@@ -158,5 +158,56 @@
 
 
 
+
+<!-- Portfolio gag popup -->
+<div id="portfolio-popup" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:9999;
+  align-items:center;
+  justify-content:center;
+" onclick="this.style.display='none'">
+  <div style="
+    background:#fff;
+    border-radius:12px;
+    padding:32px 40px;
+    max-width:340px;
+    text-align:center;
+    box-shadow:0 8px 32px rgba(0,0,0,0.25);
+    position:relative;
+    animation:popIn 0.25s cubic-bezier(.34,1.56,.64,1);
+  " onclick="event.stopPropagation()">
+    <div style="font-size:2.4rem;margin-bottom:10px">👀</div>
+    <h3 style="margin-bottom:8px;font-size:1.2rem">Psst…</h3>
+    <p style="color:#555;line-height:1.5">You're already here!<br>This <em>is</em> the portfolio.</p>
+    <button onclick="document.getElementById('portfolio-popup').style.display='none'" style="
+      margin-top:20px;
+      padding:8px 24px;
+      background:#1a1a1a;
+      color:#fff;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:0.9rem;
+    ">Oh right, carry on 😄</button>
+  </div>
+</div>
+
+<style>
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+</style>
+
+<script>
+function portfolioGag(e) {
+  e.preventDefault();
+  const popup = document.getElementById('portfolio-popup');
+  popup.style.display = 'flex';
+}
+</script>
 </body>
 </html>

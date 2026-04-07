@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 0.12em;
+      color: #e2c27d;
+    }
+
+    #mode-selector {
+      display: flex;
+      gap: 12px;
+    }
+
+    #mode-selector button {
+      padding: 8px 20px;
+      border: 2px solid #e2c27d;
+      background: transparent;
+      color: #e2c27d;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    #mode-selector button.active,
+    #mode-selector button:hover {
+      background: #e2c27d;
+      color: #1a1a2e;
+    }
+
+    #status {
+      font-size: 1.1rem;
+      min-height: 1.5em;
+      color: #e2c27d;
+      text-align: center;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: min(320px, 90vw);
+    }
+
+    .cell {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #16213e;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      user-select: none;
+    }
+
+    .cell:hover:not(.taken) { background: #0f3460; transform: scale(1.05); }
+    .cell.taken { cursor: default; }
+    .cell.x { color: #e94560; }
+    .cell.o { color: #4dc8ff; }
+    .cell.win-cell { background: #2a3a5a; box-shadow: 0 0 12px rgba(226,194,125,0.5); }
+
+    #reset-btn {
+      padding: 10px 32px;
+      background: #e2c27d;
+      color: #1a1a2e;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    #reset-btn:hover { opacity: 0.85; }
+
+    #score {
+      display: flex;
+      gap: 28px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    #score span { text-align: center; }
+    #score b { display: block; font-size: 1.3rem; color: #eee; }
+
+    a.back-link {
+      position: fixed;
+      top: 14px;
+      left: 16px;
+      font-size: 0.8rem;
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    a.back-link:hover { color: #eee; }
+  </style>
+</head>
+<body>
+  <a class="back-link" href="../../index.html">← Portfolio</a>
+  <h1>Tic Tac Toe</h1>
+
+  <div id="mode-selector">
+    <button class="active" onclick="setMode('ai')" id="btn-ai">vs AI</button>
+    <button onclick="setMode('2p')" id="btn-2p">2 Players</button>
+  </div>
+
+  <div id="score">
+    <span>X <b id="score-x">0</b></span>
+    <span>Draws <b id="score-d">0</b></span>
+    <span>O <b id="score-o">0</b></span>
+  </div>
+
+  <div id="status">Your turn (X)</div>
+
+  <div id="board">
+    <div class="cell" onclick="move(0)"></div>
+    <div class="cell" onclick="move(1)"></div>
+    <div class="cell" onclick="move(2)"></div>
+    <div class="cell" onclick="move(3)"></div>
+    <div class="cell" onclick="move(4)"></div>
+    <div class="cell" onclick="move(5)"></div>
+    <div class="cell" onclick="move(6)"></div>
+    <div class="cell" onclick="move(7)"></div>
+    <div class="cell" onclick="move(8)"></div>
+  </div>
+
+  <button id="reset-btn" onclick="reset()">New Game</button>
+
+  <script>
+    const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+    let board = Array(9).fill(null);
+    let currentPlayer = 'X';
+    let gameOver = false;
+    let mode = 'ai'; // 'ai' or '2p'
+    let scores = { X: 0, O: 0, D: 0 };
+
+    function setMode(m) {
+      mode = m;
+      document.getElementById('btn-ai').classList.toggle('active', m === 'ai');
+      document.getElementById('btn-2p').classList.toggle('active', m === '2p');
+      reset();
+    }
+
+    function cells() { return document.querySelectorAll('.cell'); }
+
+    function render() {
+      cells().forEach((cell, i) => {
+        cell.textContent = board[i] === 'X' ? '✕' : board[i] === 'O' ? '○' : '';
+        cell.className = 'cell' + (board[i] ? ' taken ' + board[i].toLowerCase() : '');
+      });
+      document.getElementById('score-x').textContent = scores.X;
+      document.getElementById('score-o').textContent = scores.O;
+      document.getElementById('score-d').textContent = scores.D;
+    }
+
+    function checkWinner(b) {
+      for (const line of WINS) {
+        const [a, c, d] = line;
+        if (b[a] && b[a] === b[c] && b[a] === b[d]) return { winner: b[a], line };
+      }
+      if (b.every(v => v)) return { winner: null, line: null }; // draw
+      return null;
+    }
+
+    function move(i) {
+      if (gameOver || board[i]) return;
+      if (mode === 'ai' && currentPlayer === 'O') return;
+
+      board[i] = currentPlayer;
+      render();
+
+      const result = checkWinner(board);
+      if (result !== null) { endGame(result); return; }
+
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+      if (mode === 'ai' && currentPlayer === 'O' && !gameOver) {
+        updateStatus();
+        setTimeout(aiMove, 350);
+      } else {
+        updateStatus();
+      }
+    }
+
+    function aiMove() {
+      const best = minimax(board, 'O', 0);
+      board[best.idx] = 'O';
+      render();
+      const result = checkWinner(board);
+      if (result !== null) { endGame(result); return; }
+      currentPlayer = 'X';
+      updateStatus();
+    }
+
+    function minimax(b, player, depth) {
+      const result = checkWinner(b);
+      if (result !== null) {
+        if (result.winner === 'O') return { score: 10 - depth };
+        if (result.winner === 'X') return { score: depth - 10 };
+        return { score: 0 };
+      }
+
+      const moves = [];
+      b.forEach((v, i) => {
+        if (!v) {
+          b[i] = player;
+          const s = minimax(b, player === 'O' ? 'X' : 'O', depth + 1).score;
+          b[i] = null;
+          moves.push({ idx: i, score: s });
+        }
+      });
+
+      if (player === 'O') return moves.reduce((a, c) => c.score > a.score ? c : a);
+      return moves.reduce((a, c) => c.score < a.score ? c : a);
+    }
+
+    function endGame({ winner, line }) {
+      gameOver = true;
+      if (winner) {
+        scores[winner]++;
+        render();
+        if (line) {
+          const cellEls = cells();
+          line.forEach(i => cellEls[i].classList.add('win-cell'));
+        }
+        document.getElementById('status').textContent =
+          mode === 'ai' && winner === 'O' ? 'AI wins!' :
+          mode === 'ai' && winner === 'X' ? 'You win!' :
+          winner + ' wins!';
+      } else {
+        scores.D++;
+        render();
+        document.getElementById('status').textContent = "It's a draw!";
+      }
+    }
+
+    function updateStatus() {
+      if (gameOver) return;
+      if (mode === 'ai') {
+        document.getElementById('status').textContent =
+          currentPlayer === 'X' ? 'Your turn (X)' : 'AI is thinking...';
+      } else {
+        document.getElementById('status').textContent = currentPlayer + "'s turn";
+      }
+    }
+
+    function reset() {
+      board = Array(9).fill(null);
+      currentPlayer = 'X';
+      gameOver = false;
+      render();
+      updateStatus();
+    }
+
+    render();
+    updateStatus();
+  </script>
+</body>
+</html>
