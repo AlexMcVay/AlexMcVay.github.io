@@ -110,18 +110,14 @@ h2 {
 }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  /* Allows wrapping if necessary */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
-  /* Adds space between cards */
-  justify-content: center;
-  /* Centers cards in the container */
-
+  /* Lines cards up into a true grid */
 }
 
 .card {
-  width: 200px;
+  width: 100%;
   padding: 15px;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
