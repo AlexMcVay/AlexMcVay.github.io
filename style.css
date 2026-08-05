@@ -110,14 +110,16 @@ h2 {
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  /* Lines cards up into a true grid */
+  /* Flex-based grid: cards wrap into even rows/columns */
 }
 
 .card {
-  width: 100%;
+  box-sizing: border-box;
+  flex: 1 1 220px;
+  max-width: 300px;
   padding: 15px;
   border: 1px solid var(--accent-color);
   border-radius: 8px;
