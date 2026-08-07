@@ -77,6 +77,21 @@ This portfolio website serves as a platform to showcase my skills, projects, and
 -   **Deployment:**
     -   Follow the deployment instructions for your chosen platform (Netlify, Vercel, GitHub Pages, etc.).
 
+## Generated directories
+
+`projects/perfectpitch/` is **build output, not source.** It is published from
+the private `AlexMcVay/perfectpitch` repository by that repo's
+`Deploy client to portfolio site` workflow, which replaces the whole directory
+on every deploy — anything edited here by hand is lost on the next push.
+
+This is how a private project gets served from a public site: only the compiled
+bundle is copied across, never the source. To change the app, change it in
+`perfectpitch` and let the workflow republish.
+
+Because each deploy commits freshly hashed asset filenames, this directory adds
+to the repository's history over time. Harmless for a site this size; squash the
+history if it ever becomes worth it.
+
 ## Contributing
 
 Contributions are welcome! If you find a bug or have a suggestion, please open an issue or submit a pull request.
